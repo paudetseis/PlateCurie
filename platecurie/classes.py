@@ -69,8 +69,10 @@ class MagGrid(Grid):
         Units of Magnetic data ('nTesla')
     ``sg_units`` : str
         Units of wavelet PSD (scalogram) ('nTesla^2/|k|')
-    ``units`` : str
+    ``logsg_units`` : str
         Units of log of wavelet PSD (log(scalogram)) ('log(nTesla^2/|k|)')
+    ``title``: str
+        Descriptor for Magnetic anomaly data
 
     .. rubric: Example
     
@@ -84,9 +86,9 @@ class MagGrid(Grid):
 
     """
 
-    def __init__(self, grid, xmin, xmax, ymin, ymax):
+    def __init__(self, grid, dx, dy):
 
-        super().__init__(grid, xmin, xmax, ymin, ymax)
+        super().__init__(grid, dx, dy)
         # self.height = height
         self.units = 'nTesla'
         self.sg_units = r'nTesla$^2$/|k|'
@@ -120,15 +122,6 @@ class MagGrid(Grid):
         Results are stored as attributes of :class:`~platecurie.classes.MagGrid` 
         object.
         """
-
-        # Delete attributes to release some memory
-        try:
-            del self.trace
-            del self.summary
-            del self.map_estimate   
-            del self.cell        
-        except:
-            print("first attempt at estimating cell parameters")
 
         # Extract admittance and coherence at cell indices
         psd = self.wl_sg[cell[0], cell[1], :]
@@ -218,19 +211,19 @@ class MagGrid(Grid):
         self.fix_beta = fix_beta
 
         # Initialize result grids to zoroes
-        mean_A_grid = np.zeros((int(self.nx/nn),int(self.ny/nn)))
-        MAP_A_grid = np.zeros((int(self.nx/nn),int(self.ny/nn)))
-        std_A_grid = np.zeros((int(self.nx/nn),int(self.ny/nn)))
-        mean_zt_grid = np.zeros((int(self.nx/nn),int(self.ny/nn)))
-        MAP_zt_grid = np.zeros((int(self.nx/nn),int(self.ny/nn)))
-        std_zt_grid = np.zeros((int(self.nx/nn),int(self.ny/nn)))
-        mean_dz_grid = np.zeros((int(self.nx/nn),int(self.ny/nn)))
-        MAP_dz_grid = np.zeros((int(self.nx/nn),int(self.ny/nn)))
-        std_dz_grid = np.zeros((int(self.nx/nn),int(self.ny/nn)))
+        mean_A_grid = np.zeros((int(self.ny/nn),int(self.nx/nn)))
+        MAP_A_grid = np.zeros((int(self.ny/nn),int(self.nx/nn)))
+        std_A_grid = np.zeros((int(self.ny/nn),int(self.nx/nn)))
+        mean_zt_grid = np.zeros((int(self.ny/nn),int(self.nx/nn)))
+        MAP_zt_grid = np.zeros((int(self.ny/nn),int(self.nx/nn)))
+        std_zt_grid = np.zeros((int(self.ny/nn),int(self.nx/nn)))
+        mean_dz_grid = np.zeros((int(self.ny/nn),int(self.nx/nn)))
+        MAP_dz_grid = np.zeros((int(self.ny/nn),int(self.nx/nn)))
+        std_dz_grid = np.zeros((int(self.ny/nn),int(self.nx/nn)))
         if self.fix_beta is None:
-            mean_beta_grid = np.zeros((int(self.nx/nn),int(self.ny/nn)))
-            MAP_beta_grid = np.zeros((int(self.nx/nn),int(self.ny/nn)))
-            std_beta_grid = np.zeros((int(self.nx/nn),int(self.ny/nn)))
+            mean_beta_grid = np.zeros((int(self.ny/nn),int(self.nx/nn)))
+            MAP_beta_grid = np.zeros((int(self.ny/nn),int(self.nx/nn)))
+            std_beta_grid = np.zeros((int(self.ny/nn),int(self.nx/nn)))
 
         if parallel:
 
@@ -244,8 +237,8 @@ class MagGrid(Grid):
             #     for i in range(0, self.nx-nn, nn) for j in range(0, self.ny-nn, nn))
 
         else:
-            for i in range(0, self.nx-nn, nn):
-                for j in range(0, self.ny-nn, nn):
+            for i in range(0, self.ny-nn, nn):
+                for j in range(0, self.nx-nn, nn):
                     
                     # For reference - index values
                     print(i,j)

@@ -203,8 +203,8 @@ def calculate_psd(k, A, zt, dz, beta):
     """
     Calculate analytical expression for the power-spectral density function. 
 
-    :type k: np.ndarray
-    :param k: Wavenumbers (rad/m)
+    :type k: :class:`~numpy.ndarray`
+    :param k: 1D array of wavenumbers
     :type A: float
     :param A: Constant (i.e., DC) value for PSD [1., 30.]
     :type zt: float
@@ -217,11 +217,63 @@ def calculate_psd(k, A, zt, dz, beta):
     :return:  
         (:class:`~numpy.ndarray`): Power-spectral density function (shape ``len(k)``)
 
+    :rubric: References
+
+        Audet, P., and Gosselin, J.M. (2019). Curie depth estimation from magnetic 
+        anomaly data: a re-assessment using multitaper spectral analysis and Bayesian 
+        inference. Geophysical Journal International, 218, 494-507. 
+        https://doi.org/10.1093/gji/ggz166
+
+        Blakely, R.J., 1995. Potential Theory in Gravity and Magnetic Applications,
+        Cambridge Univ. Press.
+
     """
     kk = k*1.e3
 
     # Theoretical equation for magnetized layer 
     return A - beta*np.log(kk) - 2.*kk*zt + 2.*np.log(1. - np.exp(-kk*dz))
+
+
+def calculate_bouligand(k, A, zt, dz, beta):
+    """
+    Calculate the synthetic power spectral density of
+    magnetic anomalies Equation (4) of Bouligand et al. (2009)
+    
+    :type k: :class:`~numpy.ndarray`
+    :param k: 1D array of wavenumbers
+    :type A: float
+    :param A: Constant (i.e., DC) value for PSD [1., 30.]
+    :type zt: float
+    :param zt: Depth to top of magnetized layer (km) [0., 10.]
+    :type dz: float
+    :param dz: Thickness of magnetized layer (km) [1., 50.]
+    :type beta: float
+    :param beta: Power-law exponent for fractal magnetization
+
+    :return:  
+        (:class:`~numpy.ndarray`): Power-spectral density function (shape ``len(k)``)
+
+    :rubric: References
+
+        Bouligand, C., J. M. G. Glen, and R. J. Blakely (2009), Mapping Curie
+        temperature depth in the western United States with a fractal model for
+        crustal magnetization, J. Geophys. Res., 114, B11104,
+        doi:10.1029/2009JB006494
+        
+    """
+    # from scipy.special import kv
+    kh = k*1.e3
+    khdz = kh * dz
+    coshkhdz = np.cosh(khdz)
+
+    Phi1d = A - 2.0 * kh * zt - (beta - 1.0) * np.log(kh) - khdz
+    C = (np.sqrt(np.pi)/gamma(1.0 + 0.5 * beta)*( \
+        0.5 * coshkhdz * gamma(0.5 * (1.0 + beta)) - \
+        kv((-0.5 * (1.0 + beta)), khdz) * np.power(0.5 * khdz, \
+            (0.5 * (1.0 + beta)))))
+
+    Phi1d += np.log(C)
+    return Phi1d
 
 
 @as_op(itypes=[tt.dvector, tt.dscalar, tt.dscalar, tt.dscalar, tt.dscalar], 

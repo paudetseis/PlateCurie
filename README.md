@@ -3,17 +3,19 @@
 <!-- ![](./plateflex/examples/picture/tws_logo.png)
  -->
 Crustal magnetic anomalies carry information on the source distribution of magnetization
-in the Earth's crust. The Curie point corresponds to the depth at which crustal rocks loose
+in the Earth's crust [(Blakely, 1995)](#references). 
+The Curie point corresponds to the depth at which crustal rocks loose
 their magnetization where they reach their Curie temperature, and is obtained by fitting
 the power spectral density (PSD) of magnetic anomaly data with a model where magnetic anomalies
-are confined within a layer. Mapping the Curie point provides important information on 
+are confined within a layer [(Bouligand et al., 2009)](#references). 
+Mapping the Curie point provides important information on 
 geothermal gradients in the Earth; however, mapping Curie depth is a spatio-spectral 
 localization problem because the PSD needs to be calculated within moving windows at 
 wavelengths long enough to capture the greatest possible depth to the bottom of the
-magnetic layer [(Audet and Gosselin, 2019; Mather et al., 2019)](#references). 
+magnetic layer [(Audet and Gosselin, 2019; Mather and Fullea, 2019)](#references). 
 The wavelet transform is particularly well suited to overcome 
 this problem because it avoids splitting the grids into small windows and can therefore 
-produce PSD functions at each point of the input grid [(Gaudreau et al., 2019])(#references)
+produce PSD functions at each point of the input grid [(Gaudreau et al., 2019)](#references).
 
 This package extends the package `plateflex`, which contains `python` modules to calculate 
 the wavelet transform and scalogram of 2D gridded data, by providing a new class 
@@ -108,7 +110,7 @@ pip install .
 ``` 
 
 ---
-> **_NOTE:_**
+**_NOTE:_**
 
 If you are actively working on the code, or making frequent edits, it is advisable to perform 
 installation from source with the `-e` flag: 
@@ -173,6 +175,11 @@ The documentation for all classes and functions in `platecurie` can be accessed 
 
 - Audet, P. and Gosselin, J.M. (2019). Curie depth estimation from magnetic anomaly data: a re-assessment using multitaper spectral analysis and Bayesian inference. Geophysical Journal International, 218, 494-507. https://doi.org/10.1093/gji/ggz166
 
+- Blakely, R.J. (1995). Potential Theory in Gravity and Magnetic Applications, Cambridge University Press.
+
+- Bouligand, C., Glen, J.M.G. and Blakely, R.J. (2009). Mapping Curie temperature depth in the western United States with a fractal model for crustal magnetization, Journal of Geophysical Research, 114, B11104, https://doi.org/10.1029/2009JB006494
+
 - Gaudreau, E., Audet, P., and Schneider, D.A. (2019). Mapping Curie depth across western Canada from a wavelet analysis of magnetic anomaly data. Journal of Geophysical Research, 124, 4365-4385. https://doi.org/10.1029/
 2018JB016726
 
+- Mather, B., and Fullea, J. (2019). Constraining the geotherm beneath the British Isles from Bayesian inversion of Curie depth: integrated modelling of magnetic, geothermal, and seismic data. Solid Earth, 10, 839-850. https://doi.org/10.5194/se-10-839-2019
