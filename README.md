@@ -20,8 +20,8 @@ produce PSD functions at each point of the input grid [(Gaudreau et al., 2019)](
 This package extends the package `plateflex`, which contains `python` modules to calculate 
 the wavelet transform and scalogram of 2D gridded data, by providing a new class 
 `MagGrid` that inherits from `plateflex.classes.Grid` with methods to estimate the properties
-of the magnetic layer (depth to top of layer, (<i>z<sub>t</sub></i>), thickness
-of layer (<i>dz</i>), and power-law exponent of fractal magnetization (<i>beta</i>))
+of the magnetic layer (depth to top of layer (<i>z<sub>t</sub></i>), thickness
+of layer (<i>dz</i>), and power-law exponent of fractal magnetization (<i>&beta;</i>))
 using Bayesian inference. Common computational workflows are covered in the Jupyter 
 notebooks bundled with this package. The software contains methods to make beautiful and
 insightful plots using the `seaborn` package.
