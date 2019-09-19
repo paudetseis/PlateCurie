@@ -7,13 +7,13 @@ in the Earth's crust [(Blakely, 1995)](#references).
 The Curie point corresponds to the depth at which crustal rocks loose
 their magnetization where they reach their Curie temperature, and is obtained by fitting
 the power spectral density (PSD) of magnetic anomaly data with a model where magnetic anomalies
-are confined within a layer [(Bouligand et al., 2009)](#references). 
+are confined within a layer 
+[(Bouligand et al., 2009; Audet and Gosselin, 2019; Mather and Fullea, 2019)](#references). 
 Mapping the Curie point provides important information on 
 geothermal gradients in the Earth; however, mapping Curie depth is a spatio-spectral 
 localization problem because the PSD needs to be calculated within moving windows at 
 wavelengths long enough to capture the greatest possible depth to the bottom of the
-magnetic layer [(Audet and Gosselin, 2019; Mather and Fullea, 2019)](#references). 
-The wavelet transform is particularly well suited to overcome 
+magnetic layer. The wavelet transform is particularly well suited to overcome 
 this problem because it avoids splitting the grids into small windows and can therefore 
 produce PSD functions at each point of the input grid [(Gaudreau et al., 2019)](#references).
 
