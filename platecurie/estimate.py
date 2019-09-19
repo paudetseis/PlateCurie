@@ -73,7 +73,7 @@ def set_model(k, psd, epsd, fix_beta=None):
         if fix_beta is not None:
 
             # Pass `beta` variable as theano variable
-            var_beta = tt.as_tensor_variable(fix_beta)
+            var_beta = tt.as_tensor_variable(np.float64(fix_beta))
             psd_exp = calculate_psd_theano(k_obs, A, zt, dz, var_beta)
 
         else:

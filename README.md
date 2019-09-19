@@ -1,43 +1,28 @@
-# PlateFlex: Software for mapping the effective elastic thickness of the lithosphere
+# PlateCurie: Software for mapping Curie depth from a wavelet analysis of magnetic anomaly data
 
 <!-- ![](./plateflex/examples/picture/tws_logo.png)
  -->
-The flexure of elastic plates is a central concept in the theory of plate tectonics,
-where the Earth's lithosphere (crust and uppermost mantle) reacts to applied loads 
-by bending, a process referred to as flexural isostasy. The plate elasticity is 
-parameterized by the *flexural rigidity*, which is proportional to the product of 
-Young's modulus with the cube of the elastic plate thickness. Estimating the *effective* 
-elastic thickness (<i>T<sub>e</sub></i>) of the lithosphere (thickness 
-of an equivalent ideal elastic plate) gives important clues on the rheology of the 
-lithosphere and its thermal state. 
+Crustal magnetic anomalies carry information on the source distribution of magnetization
+in the Earth's crust. The Curie point corresponds to the depth at which crustal rocks loose
+their magnetization where they reach their Curie temperature, and is obtained by fitting
+the power spectral density (PSD) of magnetic anomaly data with a model where magnetic anomalies
+are confined within a layer. Mapping the Curie point provides important information on 
+geothermal gradients in the Earth; however, mapping Curie depth is a spatio-spectral 
+localization problem because the PSD needs to be calculated within moving windows at 
+wavelengths long enough to capture the greatest possible depth to the bottom of the
+magnetic layer [(Audet and Gosselin, 2019; Mather et al., 2019)](#references). 
+The wavelet transform is particularly well suited to overcome 
+this problem because it avoids splitting the grids into small windows and can therefore 
+produce PSD functions at each point of the input grid [(Gaudreau et al., 2019])(#references)
 
-Estimating <i>T<sub>e</sub></i> can be done by modeling the cross-spectral properties 
-(admittance and coherence) between topography and gravity anomaly data, 
-which are proxies for the distribution of flexurally compensated surface and subsurface 
-loads. These spectral properties can be calculated using different spectral
-estimation techniques - however, to map <i>T<sub>e</sub></i> variations it is 
-important to use analysis windows small enough for good spatial resolution, but 
-large enough to capture the effect of flexure at long wavelengths. The wavelet 
-transform is particularly well suited for this analysis because it avoids splitting
-the grids into small windows and can therefore produce cross-spectral functions
-at each point of the input grid.
-
-This package contains `python` and `fortran` modules to calculate the wavelet spectral
-and cross-spectral quantities of 2D gridded data of topography and gravity anomalies.
-Once obtained, the wavelet cross-spectral quantities (admittance and coherence) are
-used to determine the parameters of the effectively elastic plate, such as the 
-effective elastic thickness (<i>T<sub>e</sub></i>), the initial subsurface-to-surface
-load ratio (<i>F</i>) and optionally the initial phase difference between
-surface and subsurface loads (<i>alpha</i>). The software uses the analytical
-functions with *uniform F and alpha* to fit the admittance and/or coherence functions 
-using a probabilistic inference method. 
-
-The analysis can be done using either the Bouguer or Free air gravity anomalies, and
-over land or ocean areas. Common computational workflows are covered in the Jupyter 
+This package extends the package `plateflex`, which contains `python` modules to calculate 
+the wavelet transform and scalogram of 2D gridded data, by providing a new class 
+`MagGrid` that inherits from `plateflex.classes.Grid` with methods to estimate the properties
+of the magnetic layer (depth to top of layer, (<i>z<sub>t</sub></i>), thickness
+of layer (<i>dz</i>), and power-law exponent of fractal magnetization (<i>beta</i>))
+using Bayesian inference. Common computational workflows are covered in the Jupyter 
 notebooks bundled with this package. The software contains methods to make beautiful and
 insightful plots using the `seaborn` package.
-    
-> **_NOTE:_**  The cross-spectral quantities calculated here are the real-valued admittance and real-squared-coherency, as discussed in the [references](#references)
 
 ## Installation
 
@@ -46,78 +31,81 @@ insightful plots using the `seaborn` package.
 The current version was developed using **Python3.7**
 Also, the following packages are required:
 
-- [`gfortran`](https://gcc.gnu.org/wiki/GFortran) (or any Fortran compiler)
-- [`numpy`](https://numpy.org)
-- [`pymc3`](https://docs.pymc.io)
-- [`seaborn`](https://seaborn.pydata.org)
+- [`plateflex`](https://github.com/paudetseis/PlateFlex)
+
+.. Note::
+
+    All dependencies are installed by `plateflex`
 
 ### Installing using pip
 
-You can install `plateflex` using the [pip package manager](https://pypi.org/project/pip/):
+You can install `platecurie` using the [pip package manager](https://pypi.org/project/pip/):
 
 ```bash
-pip install plateflex
+pip install platecurie
 ```
 All the dependencies will be automatically installed by `pip`.
 
 ### Installing with conda
 
-You can install `plateflex` using the [conda package manager](https://conda.io).
+You can install `platecurie` using the [conda package manager](https://conda.io).
 Its required dependencies can be easily installed with:
 
 ```bash
-conda install numpy pymc3 matplotlib -c conda-forge
+conda install numpy pymc3 matplotlib seaborn -c conda-forge
 ```
 
-Then `plateflex` can be installed with `pip`:
+Then `platecurie` can be installed with `pip`:
 
 ```bash
-pip install plateflex
+pip install platecurie
 ```
 
 #### Conda environment
 
 We recommend creating a custom 
 [conda environment](https://conda.io/docs/user-guide/tasks/manage-environments.html)
-where `plateflex` can be installed along with its dependencies. 
+where `platecurie` can be installed along with its dependencies. 
 
-- Create a environment called `pflex` and install all dependencies:
+- Create a environment called `curie` and install all dependencies:
 
 ```bash
-conda create -n pflex python=3.7 numpy pymc3 matplotlib seaborn -c conda-forge
+conda create -n curie python=3.7 numpy pymc3 matplotlib seaborn -c conda-forge
 ```
 
-- or create it from the `pflex_env.yml` file by first checking out the repository:
+- or create it from the `curie_env.yml` file by first checking out the repository:
 
 ```bash
-git checkout https://github.com/paudetseis/PlateFlex.git
-cd PlateFlex
-conda env create -f pflex_env.yml
+git checkout https://github.com/paudetseis/PlateCurie.git
+cd PlateCurie
+conda env create -f curie_env.yml
 ```
 
 Activate the newly created environment:
 
 ```bash
-conda activate pflex
+conda activate curie
 ```
 
-Install `plateflex` with `pip`:
+Install `platecurie` with `pip`:
 
 ```bash
 pip install plateflex
+pip install platecurie
 ```
 
 ### Installing from source
 
 Download or clone the repository:
 ```bash
-git clone https://github.com/paudetseis/PlateFlex.git
-cd PlateFlex
+git clone https://github.com/paudetseis/PlateCurie.git
+cd PlateCurie
 ```
 
 Next we recommend following the steps for creating a `conda` environment (see [above](#conda-environment)). Then install using `pip`:
 
 ```bash
+pip install plateflex
 pip install .
 ``` 
 
@@ -142,16 +130,16 @@ package available on the system.
 ### Jupyter Notebooks
 
 Included in this package is a set of Jupyter Notebooks, which give examples on how to call the various routines 
-<!-- and obtain plane wave seismograms and receiver functions. The Notebooks describe how to reproduce published examples of synthetic data from [Audet (2016)](#references) and [Porter et al. (2011)](#references).
+The Notebooks describe how to reproduce published examples of synthetic data from [Gaudreau et al., (2019)](#references).
 
-- [sim_obs_Audet2016.ipynb](./plateflex/examples/Notebooks/sim_obs_Audet2016.ipynb): Example plane wave seismograms and P receiver functions for OBS data from [Audet (2016)](#Audet).
+<!-- - [sim_obs_Audet2016.ipynb](./plateflex/examples/Notebooks/sim_obs_Audet2016.ipynb): Example plane wave seismograms and P receiver functions for OBS data from [Audet (2016)](#Audet).
 - [sim_Prfs_Porter2011.ipynb](./plateflex/examples/Notebooks/sim_Prfs_Porter2011.ipynb): Example P receiver functions from [Porter et al. (2011)](#Porter)
 - [sim_SKS.ipynb](./plateflex/examples/Notebooks/sim_SKS.ipynb): Example plane wave seismograms for SKS splitting studies.
  -->
-After [installing `plateflex`](#installation), these notebooks can be locally installed (i.e., in a local folder `Notebooks`) from the package by running:
+After [installing `platecurie`](#installation), these notebooks can be locally installed (i.e., in a local folder `Notebooks`) from the package by running:
 
 ```python
-from plateflex import doc
+from platecurie import doc
 doc.install_doc(path='Notebooks')
 ```
 
@@ -167,26 +155,26 @@ Then ```cd Notebooks``` and type:
 jupyter notebook
 ```
 
-You can then save the notebooks as `python` scripts, check out the model files and you should be good to go!
+You can then save the notebooks as `python` scripts and you should be good to go!
 
 ### Testing
 
 A series of tests are located in the ``tests`` subdirectory. In order to perform these tests, clone the repository and run `pytest` (`conda install pytest` if needed):
 
 ```bash
-git checkout https://github.com/paudetseis/PlateFlex.git
-cd PlateFlex
+git checkout https://github.com/paudetseis/PlateCurie.git
+cd PlateCurie
 pytest -v
 ```
 
 ### Documentation
 
-The documentation for all classes and functions in `plateflex` can be accessed from https://paudetseis.github.io/PlateFlex/.
+The documentation for all classes and functions in `platecurie` can be accessed from https://paudetseis.github.io/PlateCurie/.
 
 ## References
 
-- Audet, P. (2014). Toward mapping the effective elastic thickness of planetary lithospheres
-from a spherical wavelet analysis of gravity and topography. Physics of the Earth and Planetary Interiors, 226, 48-82. https://doi.org/10.1016/j.pepi.2013.09.011
+- Audet, P. and Gosselin, J.M. (2019). Curie depth estimation from magnetic anomaly data: a re-assessment using multitaper spectral analysis and Bayesian inference. Geophysical Journal International, 218, 494-507. https://doi.org/10.1093/gji/ggz166
 
-- Kirby, J.F. (2014). Estimation of the effective elastic thickness of the lithosphere using inverse spectral methods: The state of the art. Tectonophysics, 631, 87-116. https://doi.org/10.1016/j.tecto.2014.04.021
+- Gaudreau, E., Audet, P., and Schneider, D.A. (2019). Mapping Curie depth across western Canada from a wavelet analysis of magnetic anomaly data. Journal of Geophysical Research, 124, 4365-4385. https://doi.org/10.1029/
+2018JB016726
 
