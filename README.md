@@ -33,9 +33,7 @@ Also, the following packages are required:
 
 - [`plateflex`](https://github.com/paudetseis/PlateFlex)
 
-.. Note::
-
-    All dependencies are installed by `plateflex`
+> **_NOTE:_**  All dependencies are installed from `plateflex`
 
 ### Installing using pip
 
