@@ -40,7 +40,7 @@ from platecurie import conf as cf
 from theano.compile.ops import as_op
 import theano.tensor as tt
 
-def set_model(k, psd, epsd, fix_beta=None):
+def set_model(k, psd, epsd, fix_beta=None, prior_zt=None):
     """
     Function to set up a ``pymc3`` model using default bounds on the prior
     distribution of parameters and observed wavelet scalogram data. 
@@ -50,9 +50,9 @@ def set_model(k, psd, epsd, fix_beta=None):
     :type k: :class:`~numpy.ndarray`
     :param k: 1D array of wavenumbers
     :type psd: :class:`~numpy.ndarray`
-    :param psd: 1D array of wavelet admittance (wavelet PSD)
+    :param psd: 1D array of wavelet scalogram (wavelet PSD)
     :type epsd: :class:`~numpy.ndarray`
-    :param epsd: 1D array of error on wavelet admittance (wavelet PSD)
+    :param epsd: 1D array of error on wavelet scalogram (wavelet PSD)
     :type fix_beta: float, optional
     :param fix_beta: Fixed ``beta`` parameter or estimate it if ``None``
 
@@ -67,24 +67,31 @@ def set_model(k, psd, epsd, fix_beta=None):
 
         # Prior distributions
         A = pm.Uniform('A', lower=1., upper=30.)
-        zt = pm.Uniform('zt', lower=0., upper=10.)
         dz = pm.Uniform('dz', lower=1., upper=50.)
 
         if fix_beta is not None:
 
             # Pass `beta` variable as theano variable
-            var_beta = tt.as_tensor_variable(np.float64(fix_beta))
-            psd_exp = calculate_psd_theano(k_obs, A, zt, dz, var_beta)
+            beta = tt.as_tensor_variable(np.float64(fix_beta))
+
+        else:
+
+            beta = pm.Uniform('beta', lower=0., upper=4.)
+
+        if prior_zt is not None:
+
+            # Pass `beta` variable as theano variable
+            zt = tt.as_tensor_variable(np.float64(prior_zt))
 
         else:
 
             # Prior distribution of `beta`
-            beta = pm.Uniform('beta', lower=0., upper=4.)
-            psd_exp = calculate_psd_theano(k_obs, A, zt, dz, beta)
+            zt = pm.Uniform('zt', lower=0., upper=10.)
+
+        psd_exp = calculate_psd_theano(k_obs, A, zt, dz, beta)
 
         # Uncertainty as observed distribution
         dpsd = 3.*0.434*epsd/psd
-
         sigma = pm.Normal('sigma', mu=epsd, sigma=1., \
             observed=dpsd)
 
@@ -94,8 +101,7 @@ def set_model(k, psd, epsd, fix_beta=None):
 
     return model
 
-
-def estimate_cell(k, psd, epsd, fix_beta=None):
+def bayes_estimate_cell(k, psd, epsd, fix_beta=None, prior_zt=None):
     """
     Function to estimate the parameters of the flexural model at a single cell location
     of the input grids. 
@@ -121,7 +127,7 @@ def estimate_cell(k, psd, epsd, fix_beta=None):
     """
 
     # Use model returned from function ``set_model``
-    with set_model(k, psd, epsd, fix_beta):
+    with set_model(k, psd, epsd, fix_beta=fix_beta, prior_zt=prior_zt):
 
         # Sample the Posterior distribution
         trace = pm.sample(cf.samples, tune=cf.tunes, cores=cf.cores)
@@ -160,6 +166,7 @@ def get_estimates(summary, map_estimate):
     """
 
     mean_beta = None
+    mean_zt = None
 
     # Go through all estimates
     for index, row in summary.iterrows():
@@ -188,15 +195,22 @@ def get_estimates(summary, map_estimate):
             C97_5_beta = row['hpd_97.5']
             best_beta = np.float(map_estimate['beta'])
 
-    if mean_beta is not None:
+    if mean_beta is not None and mean_zt is not None:
         return mean_A, std_A, C2_5_A, C97_5_A, best_A, \
             mean_zt, std_zt, C2_5_zt, C97_5_zt, best_zt, \
             mean_dz, std_dz, C2_5_dz, C97_5_dz, best_dz, \
             mean_beta, std_beta, C2_5_beta, C97_5_beta, best_beta
-    else:
+    elif mean_beta is None and mean_zt is not None:
         return mean_A, std_A, C2_5_A, C97_5_A, best_A, \
             mean_zt, std_zt, C2_5_zt, C97_5_zt, best_zt, \
             mean_dz, std_dz, C2_5_dz, C97_5_dz, best_dz
+    elif mean_beta is not None and mean_zt is  None:
+        return mean_A, std_A, C2_5_A, C97_5_A, best_A, \
+            mean_dz, std_dz, C2_5_dz, C97_5_dz, best_dz, \
+            mean_beta, std_beta, C2_5_beta, C97_5_beta, best_beta
+    else:
+        return mean_A, std_A, C2_5_A, C97_5_A, best_A, \
+            mean_dz, std_dz, C2_5_dz, C97_5_dz, best_dz      
 
 
 def calculate_psd(k, A, zt, dz, beta):

@@ -21,11 +21,12 @@
 # SOFTWARE.
 """
 
-This :mod:`~platecurie` module contains the following ``Grid`` classe:
+This :mod:`~platecurie` module contains the following ``Grid`` classes:
 
 - :class:`~platecurie.classes.MagGrid`
+- :class:`~platecurie.classes.ZtGrid`
 
-These classes can be initiatlized with a grid of magnetic anomaly data, 
+These classes can be initiatlized with a grid of corresponding data type, 
 and contain methods inherited from :class:`~plateflex.classes.Grid` 
 for the following functionality:
 
@@ -33,10 +34,15 @@ for the following functionality:
 - Obtaining the wavelet scalogram from the wavelet transform
 - Plotting the input grids, wavelet transform components, and scalograms
 
+This module further contains the class :class:`~platecurie.classes.Project`, 
+which itself is a container of :class:`~platecurie.classes.Grid` objects 
+(with at least one :class:`~platecurie.classes.MagGrid`). Methods are 
+available to:
+
 - Estimate model parameters at single grid cell
 - Estimate model parameters at every (or decimated) grid cell
 - Plot the statistics of the estimated parameters at single grid cell
-- Plot the fitted admittance and coherence functions at single grid cell
+- Plot the fitted power-spectral density of the magnetic anomaly at single grid cell
 - Plot the final grids of model parameters
 
 """
@@ -90,11 +96,291 @@ class MagGrid(Grid):
 
         super().__init__(grid, dx, dy)
         # self.height = height
-        self.units = 'nTesla'
-        self.sg_units = r'nTesla$^2$/|k|'
-        self.logsg_units = r'log(nTesla$^2$/|k|)'
+        self.units = 'nT'
+        self.sg_units = r'nT$^2$/|k|'
+        self.logsg_units = r'log(nT$^2$/|k|)'
         self.title = 'Magnetic anomaly'
 
+class ZtGrid(Grid):
+    """
+    Basic grid class of ``platecurie`` for the top of the magnetic layer that inherits 
+    from :class:`~plateflex.classes.Grid`
+
+    Contains method to plot the grid data with default title and units using function 
+    :func:`~plateflex.plotting.plot_real_grid`.
+
+    .. rubric:: Additional Attributes
+
+    ``units`` : str
+        Units of depth ('m')
+    ``title``: str
+        Descriptor for Depth to top of magnetic layer
+
+    .. note::
+
+        This class should only be used to specify the depth to the top of the magnetic
+        layer at each cell location. Although the :class:`~plateflex.classes.Grid`
+        methods are still available, they are not useful in this context.
+
+    """
+
+    def __init__(self, grid, dx, dy):
+
+        super().__init__(grid, dx, dy)
+        self.units = 'm'
+        self.sg_units = None
+        self.logsg_units = None
+        self.title = r'Top of magnetic layer ($z_t$)'
+
+        if np.std(self.data) < 10.:
+            self.data *= 1.e3
+
+
+class SigZtGrid(Grid):
+    """
+    Basic grid class of ``platecurie`` for the estimated uncertainty in top
+    of magnetic layer that inherits from :class:`~plateflex.classes.Grid`
+
+    Contains method to plot the grid data with default title and units using function 
+    :func:`~plateflex.plotting.plot_real_grid`.
+
+    .. rubric:: Additional Attributes
+
+    ``units`` : str
+        Units of depth ('m')
+    ``title``: str
+        Descriptor for Depth to top of magnetic layer
+
+    .. note::
+
+        This class should only be used to specify the depth to the top of the magnetic
+        layer at each cell location. Although the :class:`~plateflex.classes.Grid`
+        methods are still available, they are not useful in this context.
+
+    """
+
+    def __init__(self, grid, dx, dy):
+
+        super().__init__(grid, dx, dy)
+        self.units = 'm'
+        self.sg_units = None
+        self.logsg_units = None
+        self.title = r'Uncertainty in $z_t$'
+
+        if np.std(self.data) < 10.:
+            self.data *= 1.e3
+
+class project(object):
+    """
+    Container for :class:`~platecurie.classes.MagGrid` and/or 
+    :class:`~platecurie.classes.ZtGrid`objects, with
+    methods to estimate model parameters of the magnetic layer
+    as well as plot various results. 
+
+    :type grids: list of :class:`~plateflex.classes.Grid`, optional
+    :param grids: Initial list of PlateFlex :class:`~plateflex.classes.Grid`
+        objects.
+
+    .. rubric:: Default Attributes
+
+    ``grids`` : List
+        List of :class:`~platecurie.classes.MagGrid` objects
+    ``inverse`` : str
+        Type of inversion to perform. By default the type is `'L2'` for
+        non-linear least-squares. Options are: `'L2'` or `'bayes'`
+    ``mask`` : Array
+        2D array of boolean values determined independently
+    ``initialized`` : Bool
+        Whether or not the project has been initialized and is ready for 
+        the estimation steps. By default this parameter is ``False``, 
+        unless the method :func:`~platecurie.classes.Project.init` 
+        has been executed.
+
+    .. note::
+
+        A Project can hold a list of any length with any type of 
+        :class:`~plateflex.classes.Grid` or those defined in 
+        :mod:`~platecurie` - however the estimation 
+        will only proceed if the project holds exactly one 
+        :class:`~platecurie.classes.MagGrid` object. 
+
+    .. rubric:: Examples
+
+    """
+
+    def __init__(self, grids=None):
+
+        self.inverse = 'L2'
+        self.grids = []
+        self.mask = None
+        self.initialized = False
+
+        if isinstance(grids, Grid):
+            grids = [grids]
+        if grids:
+            self.grids.extend(grids)
+
+    def __add__(self, other):
+        """
+        Add two `:class:`~plateflex.classes.Grid` objects or a 
+        :class:`~plateflex.classes.Project` object with a single grid.
+
+        """
+        if isinstance(other, Grid):
+            other = Project([other])
+        if not isinstance(other, Project):
+            raise TypeError
+        grids = self.grids + other.grids
+        return self.__class__(grids=grids)
+
+    def __iter__(self):
+        """
+        Return a robust iterator for :class:`~plateflex.classes.Grid` 
+        objects
+
+        """
+        return list(self.grids).__iter__()
+
+    def append(self, grid):
+        """
+        Append a single :class:`~plateflex.classes.Grid` object to the 
+        current `:class:`~plateflex.classes.Project` object.
+
+        :type grid: :class:`~plateflex.classes.Grid`
+        :param grid: object to append to project
+
+        .. rubric:: Example
+            
+        """
+        
+        if isinstance(grid, Grid):
+            self.grids.append(grid)
+        else:
+            msg = 'Append only supports a single Grid object as an argument.'
+            raise TypeError(msg)
+
+        return self
+
+    def extend(self, grid_list):
+        """
+        Extend the current Project object with a list of Grid objects.
+
+        :param trace_list: list of :class:`~plateflex.classes.Grid` objects or
+            :class:`~plateflex.classes.Project`.
+
+        .. rubric:: Example
+
+        """
+        if isinstance(grid_list, list):
+            for _i in grid_list:
+                # Make sure each item in the list is a Grid object.
+                if not isinstance(_i, Grid):
+                    msg = 'Extend only accepts a list of Grid objects.'
+                    raise TypeError(msg)
+            self.grids.extend(grid_list)
+        elif isinstance(grid_list, Project):
+            self.grids.extend(grid_list.grids)
+        else:
+            msg = 'Extend only supports a list of Grid objects as argument.'
+            raise TypeError(msg)
+        return self
+
+
+    def init(self):
+        """
+        Method to initialize a project. This step is required before estimating the 
+        model parameters. The method checks that the project contains
+        exactly one :class:`~platecurie.classes.MagGrid`. 
+        It also ensures that all grids have the same shape and sampling intervals. 
+        If a grid of type :class:`~platecurie.classes.ZtGrid` (and possibly 
+        :class:`~platecurie.classes.ZtGrid`)
+        is present, the project attributes will be updated with data from the grid to be
+        used in the estimation part.  
+
+        .. rubric:: Additional Attributes
+
+        ``nx`` : int 
+            Number of grid cells in the x-direction
+        ``ny`` : int 
+            Number of grid cells in the y-direction
+        ``ns`` int 
+            Number of wavenumber samples
+        ``k`` : np.ndarray 
+            1D array of wavenumbers
+        ``initialized`` : bool
+            Set to ``True`` when method is called successfully
+            
+        .. rubric:: Optional Attributes
+
+        ``zt`` : :class:`~numpy.ndarray`
+            Grid of depth to top of magnetic anomaly (km) (shape (`nx,ny`))
+        ``szt`` : :class:`~numpy.ndarray`
+            Grid of uncertainty in depth to top of magnetic anomaly (km) (shape (`nx,ny`))
+
+        .. rubric:: Example
+
+        >>> project = Project[grids=[maggrid, ztgrid]]
+        >>> project.init()
+
+        """
+
+        # Methods will fail if there is no ``MagGrid`` object in list
+        if not any(isinstance(g, MagGrid) for g in self.grids):
+            raise(Exception('There needs to be one MagGrid object in Project'))
+
+        # Abort if there is more than one MagGrid
+        maggrid = [grid for grid in self.grids if isinstance(grid, MagGrid)]
+        if not (len(maggrid)==1):
+            raise(Exception('There is more than one MagGrid in Project - aborting'))
+        maggrid = maggrid[0]
+
+        # Check that all grids have the same shape 
+        shape = [grid.data.shape for grid in self.grids]
+        if not (len(set(shape))==1):
+            raise(Exception('Grids do not have the same shape - aborting:'+str(shape)))
+
+        # Check that all grids have the same sampling intervals
+        dd = [(grid.dx, grid.dy) for grid in self.grids]
+        if not (len(set(dd))==1):
+            raise(Exception('Grids do not have the same sampling intervals - aborting:'+str(dd)))
+
+        # Check that wavelet scalogram coefficients exist
+        try:
+            psd = maggrid.wl_sg
+        except:
+            print('Wavelet scalogram ')
+            maggrid.wlet_scalogram()
+
+        # # Initialize model attributes to None (i.e., default values will be used)
+        self.zt = None
+        self.szt = None
+
+        # Identify the ``Grid`` types and set new attributes if available
+        for grid in self.grids:
+            if isinstance(grid, ZtGrid):
+                self.zt = grid.data
+            if isinstance(grid, SigZtGrid):
+                self.szt = grid.data
+
+        if self.zt is None and self.szt is None:
+            print('Will estimate zt using uniform (uniformative) prior')
+        elif self.zt is not None and self.szt is not None:
+            print('Will use log-normal distribution with zt and szt as prior for zt')
+            self.zt_prior = 'c-lognormal'
+        elif self.zt is not None and self.szt is None:
+            print('Warning: zt is set but szt is not: Will use zt as max range of uniform prior')
+        else:
+            print('Warning: szt is set but zt is not: Will estimating zt using uniform prior')
+
+
+        # Now set project attributes from first grid object
+        self.k = self.grids[0].k
+        self.ns = self.grids[0].ns
+        self.nx = self.grids[0].nx
+        self.ny = self.grids[0].ny
+        self.dx = self.grids[0].dx
+        self.dy = self.grids[0].dy
+        self.initialized = True
 
     def estimate_cell(self, cell=(0,0), fix_beta=None, returned=False):
         """
@@ -119,28 +405,45 @@ class MagGrid(Grid):
         ``cell`` : tuple 
             Indices of cell location within grid
         
-        Results are stored as attributes of :class:`~platecurie.classes.MagGrid` 
+        Results are stored as attributes of :class:`~platecurie.classes.Project` 
         object.
+
         """
 
         # Extract admittance and coherence at cell indices
         psd = self.wl_sg[cell[0], cell[1], :]
         epsd = self.ewl_sg[cell[0], cell[1], :]
+        if self.zt is not None:
+            zt = self.zt[cell[0], cell[1]]
 
-        trace, summary, map_estimate = estimate.estimate_cell( \
-            self.k, psd, epsd, fix_beta)
+        if self.inverse=='L2':
+            summary = estimate.L2_estimate_cell( \
+                self.k, psd, epsd, fix_beta=fix_beta, prior_zt=zt)
 
-        # Return estimates if requested
-        if returned:
-            return summary, map_estimate
+            # Return estimates if requested
+            if returned:
+                return summary
 
-        # Otherwise store as object attributes
-        else:
-            self.fix_beta = fix_beta
-            self.cell = cell
-            self.trace = trace
-            self.map_estimate = map_estimate
-            self.summary = summary
+            # Otherwise store as object attributes
+            else:
+                self.cell = cell
+                self.summary = summary
+
+        elif self.inverse=='bayes':
+
+            trace, summary, map_estimate = estimate.bayes_estimate_cell( \
+                self.k, psd, epsd, fix_beta=fix_beta, prior_zt=zt)
+
+            # Return estimates if requested
+            if returned:
+                return summary, map_estimate
+
+            # Otherwise store as object attributes
+            else:
+                self.cell = cell
+                self.trace = trace
+                self.map_estimate = map_estimate
+                self.summary = summary
 
     def estimate_grid(self, nn=10, fix_beta=None, parallel=False):
         """
