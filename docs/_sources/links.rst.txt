@@ -1,0 +1,6 @@
+GitHub Repositories
+-------------------
+
+* `PlateCurie Git repository <https://github.com/paudetseis/PlateCurie>`_
+* `PlateFlex Git repository <https://github.com/paudetseis/PlateFlex>`_
+* `PyCurious Git repository <https://github.com/brmather/pycurious>`_

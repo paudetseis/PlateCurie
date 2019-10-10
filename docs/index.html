@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PlateCurie Project Documentation &mdash; platecurie 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GitHub Repositories" href="links.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> platecurie
+          
+
+          
+            
+            <img src="_static/logo_platecurie.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Quick Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="links.html">GitHub Repositories</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#functions">Functions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Description</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="estimate.html">Module estimate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Module plotting</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">platecurie</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>PlateCurie Project Documentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="figure align-center">
+<img alt="_images/platecurie_logo.png" src="_images/platecurie_logo.png" />
+</div>
+<div class="section" id="platecurie-project-documentation">
+<h1>PlateCurie Project Documentation<a class="headerlink" href="#platecurie-project-documentation" title="Permalink to this headline">¶</a></h1>
+<p>PlateCurie is a software that extends the package <code class="docutils literal notranslate"><span class="pre">plateflex</span></code>, which contains python modules to calculate the wavelet transform and scalogram of 2D gridded data, by providing a new class <a class="reference internal" href="classes.html#platecurie.classes.MagGrid" title="platecurie.classes.MagGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">MagGrid</span></code></a> that inherits from <code class="xref py py-class docutils literal notranslate"><span class="pre">Grid</span></code> and a new class <a class="reference internal" href="classes.html#platecurie.classes.Project" title="platecurie.classes.Project"><code class="xref py py-class docutils literal notranslate"><span class="pre">Project</span></code></a> with methods to estimate the properties of the magnetic layer (depth to top of layer (zt), thickness of layer (dz), and power-law exponent of fractal magnetization (β)) using Bayesian inference. The software is bundled with <code class="docutils literal notranslate"><span class="pre">Jupyter</span></code> notebooks that describe the
+processing steps required for the estimation of model parameters.</p>
+<p>This software was inspired by a sister software <a class="reference external" href="https://github.com/brmather/pycurious">PyCurious</a> by <a class="reference external" href="https://joss.theoj.org/papers/10.21105/joss.01544">Mather and Delhaye</a>. The two softwares differ by their use of different spectral estimators (wavelet transform for <code class="docutils literal notranslate"><span class="pre">platecurie</span></code> and periodogram for <code class="docutils literal notranslate"><span class="pre">pycurious</span></code>) as well as the estimation process (either non-linear least-squares or <code class="docutils literal notranslate"><span class="pre">pymc3</span></code> bayesian estimation for <code class="docutils literal notranslate"><span class="pre">platecurie</span></code>, and a Bayesian framework for <code class="docutils literal notranslate"><span class="pre">pycurious</span></code>).</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Quick Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="links.html">GitHub Repositories</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#functions">Functions</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Description</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classes.html#maggrid">MagGrid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes.html#ztgrid">ZtGrid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classes.html#project">Project</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="estimate.html">Module estimate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Module plotting</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="links.html" class="btn btn-neutral float-right" title="GitHub Repositories" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Pascal Audet
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

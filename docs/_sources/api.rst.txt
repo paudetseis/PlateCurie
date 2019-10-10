@@ -1,0 +1,5 @@
+.. automodule:: platecurie
+   :members:
+
+Functions
+---------

@@ -57,19 +57,9 @@ Dependencies
 The current version was developed using **Python3.7** \
 Also, the following package is required:
 
-- ``plateflex`` (https://github.com/paudetseis/PlateFlex)
+- `plateflex <https://github.com/paudetseis/PlateFlex>`_
 
 See below for full installation details. 
-
-Download the software
-+++++++++++++++++++++
-
-- Clone the repository:
-
-.. sourcecode:: bash
-
-   git clone https://github.com/paudetseis/PlateCurie.git
-   cd PlateCurie
 
 Conda environment
 +++++++++++++++++
@@ -79,48 +69,52 @@ where ``platecurie`` can be installed along with its dependencies.
 
 .. sourcecode:: bash
 
-   conda create -n pcurie python=3.7 numpy pymc3 matplotlib seaborn -c conda-forge
-
-or create it from the ``pcurie_env.yml`` file:
-
-.. sourcecode:: bash
-
-   conda env create -f pcurie_env.yml
+   conda create -n curie python=3.7 numpy pymc3 matplotlib seaborn -c conda-forge
 
 Activate the newly created environment:
 
 .. sourcecode:: bash
 
-   conda activate pcurie
+   conda activate curie
 
-Installing using pip
-++++++++++++++++++++
-
-Once the previous steps are performed, you can install ``platecurie`` using pip:
+Install the required ``plateflex`` software
 
 .. sourcecode:: bash
 
    pip install plateflex
+
+Installing from source
+++++++++++++++++++++++
+
+- Clone the repository:
+
+.. sourcecode:: bash
+
+   git clone https://github.com/paudetseis/PlateCurie.git
+   cd PlateCurie
+
+- Install using ``pip``
+
+.. sourcecode:: bash
+
    pip install .
 
-.. note::
+Installing from Pypi
+++++++++++++++++++++
 
-   Please note, if you are actively working on the code, or making frequent edits, it is advisable
-   to perform the pip installation with the ``-e`` flag. This enables an editable installation, where
-   symbolic links are used rather than straight copies. This means that any changes made in the
-   local folders will be reflected in the packages available on the system.
+.. sourcecode:: bash
 
+   pip install platecurie
 
 """
 # -*- coding: utf-8 -*-
-from . import conf as cf
 from . import estimate
 from . import plotting
-from .classes import MagGrid
+from .classes import MagGrid, ZtGrid, SigZtGrid, Project
 from plateflex.cpwt import conf_cpwt as cf_wt
 
-def set_conf_cpwt():
-    cf_wt.k0 = 5.336
+def set_conf_cpwt(k0=5.336):
+    cf_wt.k0 = k0
 
 set_conf_cpwt()
 
