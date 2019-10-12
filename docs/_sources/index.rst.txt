@@ -2,8 +2,10 @@
 .. figure:: ../platecurie/examples/picture/platecurie_logo.png
    :align: center
 
-PlateCurie Project Documentation
-================================
+PlateCurie Documentation
+========================
+
+Crustal magnetic anomalies carry information on the source distribution of magnetization in the Earth's crust (`Blakely, 1995 <https://www.cambridge.org/core/books/potential-theory-in-gravity-and-magnetic-applications/348880F23008E16E663D6AD14A41D8DE>`_). The Curie point corresponds to the depth at which crustal rocks loose their magnetization where they reach their Curie temperature, and is obtained by fitting the power spectral density (PSD) of magnetic anomaly data with a model where magnetic anomalies are confined within a layer (`Bouligand et al., 2009 <https://doi.org/10.1029/2009JB006494>`_ `Audet and Gosselin, 2019 <https://doi.org/10.1093/gji/ggz166>`_ `Mather and Fullea, 2019 <https://doi.org/10.5194/se-10-839-2019>`_). Mapping the Curie point provides important information on geothermal gradients in the Earth; however, mapping Curie depth is a spatio-spectral localization problem because the PSD needs to be calculated within moving windows at wavelengths long enough to capture the greatest possible depth to the bottom of the magnetic layer. The wavelet transform is particularly well suited to overcome this problem because it avoids splitting the grids into small windows and can therefore produce PSD functions at each point of the input grid (`Gaudreau et al., 2019 <https://doi.org/10.1029/>`_).
 
 PlateCurie is a software that extends the package ``plateflex``, which contains python modules to calculate the wavelet transform and scalogram of 2D gridded data, by providing a new class :class:`~platecurie.classes.MagGrid` that inherits from :class:`~plateflex.classes.Grid` and a new class :class:`~platecurie.classes.Project` with methods to estimate the properties of the magnetic layer (depth to top of layer (zt), thickness of layer (dz), and power-law exponent of fractal magnetization (β)) using Bayesian inference. The software is bundled with ``Jupyter`` notebooks that describe the 
 processing steps required for the estimation of model parameters. 
