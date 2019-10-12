@@ -907,7 +907,7 @@ class Project(object):
                     chi2_grid = gaussian(self.chi2_grid, sigma=sigma)
                 else:
                     chi2_grid = self.chi2_grid
-                plotting.plot_real_grid(chi2_grid, mask=new_mask, \
+                flexplot.plot_real_grid(chi2_grid, mask=new_mask, \
                     title='Reduced chi-squared error', clabel=r'$\chi_{\nu}^2$', \
                     contours=contours, save=save, **kwargs)
             except:
