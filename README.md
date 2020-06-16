@@ -26,6 +26,8 @@ using Bayesian inference. Common computational workflows are covered in the Jupy
 notebooks bundled with this package. The software contains methods to make beautiful and
 insightful plots using the `seaborn` package.
 
+Authors: [`Pascal Audet`](https://www.uogeophysics.com/authors/admin/) (Developer and Maintainer)
+
 ## Installation
 
 ### Dependencies
@@ -73,10 +75,10 @@ where `platecurie` can be installed along with its dependencies.
 conda create -n curie python=3.7 numpy pymc3 matplotlib seaborn -c conda-forge
 ```
 
-- or create it from the `curie_env.yml` file by first checking out the repository:
+- or create it from the `curie_env.yml` file by first cloning the repository:
 
 ```bash
-git checkout https://github.com/paudetseis/PlateCurie.git
+git clone https://github.com/paudetseis/PlateCurie.git
 cd PlateCurie
 conda env create -f curie_env.yml
 ```
