@@ -26,7 +26,7 @@ using Bayesian inference. Common computational workflows are covered in the Jupy
 notebooks bundled with this package. The software contains methods to make beautiful and
 insightful plots using the `seaborn` package.
 
-Authors: [`Pascal Audet`](https://www.uogeophysics.com/authors/admin/) (Developer and Maintainer)
+Author: [`Pascal Audet`](https://www.uogeophysics.com/authors/admin/) (Developer and Maintainer)
 
 ## Installation
 
