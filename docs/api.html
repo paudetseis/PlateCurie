@@ -21,11 +21,11 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Description" href="classes.html" />
+    <link rel="next" title="Grid Classes" href="classes.html" />
     <link rel="prev" title="GitHub Repositories" href="links.html" /> 
 </head>
 
@@ -87,6 +87,7 @@
               <p class="caption"><span class="caption-text">Quick Links</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="links.html">GitHub Repositories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="links.html#references">References</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
@@ -99,12 +100,10 @@
 </ul>
 </li>
 </ul>
-<p class="caption"><span class="caption-text">Classes</span></p>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="classes.html">Description</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Modules</span></p>
-<ul>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Grid Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html#project-class">Project Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="estimate.html">Module estimate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plotting.html">Module plotting</a></li>
 </ul>
@@ -248,13 +247,13 @@ where <code class="docutils literal notranslate"><span class="pre">platecurie</s
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install platecurie
 </pre></div>
 </div>
-<dl class="function">
+<dl class="py function">
 <dt id="platecurie.get_conf_cpwt">
 <code class="sig-prename descclassname">platecurie.</code><code class="sig-name descname">get_conf_cpwt</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.get_conf_cpwt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print global variable that controls the spatio-spectral resolution of the
 wavelet transform</p>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">platecurie</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">platecurie</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">platecurie</span><span class="o">.</span><span class="n">get_conf_cpwt</span><span class="p">()</span>
 <span class="go">Wavelet parameter used in platecurie.cpwt:</span>
 <span class="go">------------------------------------------</span>
@@ -274,7 +273,7 @@ wavelet transform</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="classes.html" class="btn btn-neutral float-right" title="Description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="classes.html" class="btn btn-neutral float-right" title="Grid Classes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="links.html" class="btn btn-neutral float-left" title="GitHub Repositories" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
