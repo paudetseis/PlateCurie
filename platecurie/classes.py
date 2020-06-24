@@ -914,6 +914,172 @@ class Project(object):
                 print("parameter 'chi2' was not estimated")
 
 
+    def save_results(
+            self, mean_A=False, MAP_A=False, std_A=False,
+            mean_dz=False, MAP_dz=False, std_dz=False, 
+            mean_beta=False, MAP_beta=False, std_beta=False, 
+            mean_zt=False, MAP_zt=False, std_zt=False, 
+            chi2=False, mask=False, contours=None,
+            filter=True, sigma=1, prefix='PlateFlex_'):
+        """
+        Method to save grids of estimated parameters with default file names. 
+
+        :type mean/MAP/std_A/dz/beta/zt: bool
+        :param mean/MAP/std_A/dz/beta/zt: Type of grid to save. 
+            All variables default to False (no grid saved)
+        :type mask: bool
+        :param mask: Whether or not to save the mask
+        :type contours: List
+        :param contours: List of contours with coordinate positions
+        :type filter: bool
+        :param filter: Whether or not to filter the resulting grid using a Gaussian filter
+        :type sigma: int
+        :param sigma: Standard deviation of filter (in terms of adjacent cells), if set to ``True``
+        :type prefix: str
+        :param prefix: Prefix of file name. 
+
+        .. note::
+
+           It is advisable to save each grid separately using one call per grid, in order
+           to have more control on file names.
+
+        """
+
+        def save_grid(pars, grid, label, prefix):
+
+            import pandas as pd
+
+            xx, yy = np.mgrid[0:pars[0], 0:pars[1]]
+            data = np.array([pars[3]*yy.flatten(), pars[2] *
+                             xx.flatten(), grid.flatten()]).T
+            columns = ['x', 'y', label]
+
+            df = pd.DataFrame(data=data, columns=columns)
+
+            df.to_csv(prefix + label + '.csv', index=False)
+
+        from skimage.filters import gaussian
+
+        (nnx, nny) = self.mean_A_grid.shape
+        (ddx, ddy) = self.dx*self.nn, self.dy*self.nn
+
+        pars = [nnx, nny, ddx, ddy]
+
+        if mask:
+            try:
+                new_mask = self.new_mask_grid
+                save_grid(pars, new_mask, 'mask', prefix)
+            except:
+                new_mask = None
+                print('No new mask found. Skipping')
+        else:
+            new_mask = None
+
+        if contours is not None:
+            contours = np.array(contours)/self.nn
+
+        if mean_A:
+            if filter:
+                mean_A_grid = gaussian(self.mean_A_grid, sigma=sigma)
+            else:
+                mean_A_grid = self.mean_A_grid
+            save_grid(pars, mean_A_grid, 'mean_A', prefix)
+        if MAP_A:
+            if filter:
+                MAP_A_grid = gaussian(self.MAP_A_grid, sigma=sigma)
+            else:
+                MAP_A_grid = self.MAP_A_grid
+            save_grid(pars, MAP_A_grid, 'MAP_A', prefix)
+        if std_A:
+            if filter:
+                std_A_grid = gaussian(self.std_A_grid, sigma=sigma)
+            else:
+                std_A_grid = self.std_A_grid
+            save_grid(pars, std_A_grid, 'std_A', prefix)
+        if mean_dz:
+            if filter:
+                mean_dz_grid = gaussian(self.mean_dz_grid, sigma=sigma)
+            else:
+                mean_dz_grid = self.mean_dz_grid
+            save_grid(pars, mean_dz_grid, 'mean_dz', prefix)
+        if MAP_dz:
+            if filter:
+                MAP_dz_grid = gaussian(self.MAP_dz_grid, sigma=sigma)
+            else:
+                MAP_dz_grid = self.MAP_dz_grid
+            save_grid(pars, MAP_dz_grid, 'MAP_dz', prefix)
+        if std_dz:
+            if filter:
+                std_dz_grid = gaussian(self.std_dz_grid, sigma=sigma)
+            else:
+                std_dz_grid = self.std_dz_grid
+            save_grid(pars, std_dz_grid, 'std_dz', prefix)
+        if mean_beta:
+            try:
+                if filter:
+                    mean_beta_grid = gaussian(mean_beta_grid, sigma)
+                else:
+                    mean_beta_grid = self.mean_beta_grid
+                save_grid(pars, mean_beta_grid, 'mean_beta', prefix)
+            except:
+                print("parameter 'beta' was not estimated")
+        if MAP_beta:
+            try:
+                if filter:
+                    MAP_beta_grid = gaussian(MAP_beta_grid, sigma=sigma)
+                else:
+                    MAP_beta_grid = self.MAP_beta_grid
+                save_grid(pars, MAP_beta_grid, 'MAP_beta', prefix)
+            except:
+                print("parameter 'beta' was not estimated")
+        if std_beta:
+            try:
+                if filter:
+                    std_beta_grid = gaussian(std_beta_grid, sigma=sigma)
+                else:
+                    std_beta_grid = self.std_beta_grid
+                save_grid(pars, std_beta_grid, 'std_beta', prefix)
+            except:
+                print("parameter 'beta' was not estimated")
+        if mean_zt:
+            try:
+                if filter:
+                    mean_zt_grid = gaussian(mean_zt_grid, sigma)
+                else:
+                    mean_zt_grid = self.mean_zt_grid
+                save_grid(pars, mean_zt_grid, 'mean_zt', prefix)
+            except:
+                print("parameter 'zt' was not estimated")
+        if MAP_zt:
+            try:
+                if filter:
+                    MAP_zt_grid = gaussian(MAP_zt_grid, sigma=sigma)
+                else:
+                    MAP_zt_grid = self.MAP_zt_grid
+                save_grid(pars, MAP_zt_grid, 'MAP_zt', prefix)
+            except:
+                print("parameter 'zt' was not estimated")
+        if std_zt:
+            try:
+                if filter:
+                    std_zt_grid = gaussian(std_zt_grid, sigma=sigma)
+                else:
+                    std_zt_grid = self.std_zt_grid
+                save_grid(pars, std_zt_grid, 'std_zt', prefix)
+            except:
+                print("parameter 'zt' was not estimated")
+        if chi2:
+            try:
+                if filter:
+                    chi2_grid = gaussian(self.chi2_grid, sigma=sigma)
+                else:
+                    chi2_grid = self.chi2_grid
+                save_grid(pars, chi2_grid, 'chi2', prefix)
+            except:
+                print("parameter 'chi2' was not estimated")
+
+
+
 def _progressbar(it, prefix="", size=60, file=sys.stdout):
     count = len(it)
     def show(j):
