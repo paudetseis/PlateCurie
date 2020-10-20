@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Description &mdash; platecurie 0.0.1 documentation</title>
+  <title>Grid Classes &mdash; platecurie 0.0.1 documentation</title>
   
 
   
@@ -21,11 +21,11 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -87,36 +87,34 @@
               <p class="caption"><span class="caption-text">Quick Links</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="links.html">GitHub Repositories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="links.html#references">References</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api.html">Licence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#installation">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#functions">Functions</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Classes</span></p>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Description</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Grid Classes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#maggrid">MagGrid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ztgrid">ZtGrid</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#project-class">Project Class</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#project">Project</a></li>
 </ul>
 </li>
-</ul>
-<p class="caption"><span class="caption-text">Modules</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="estimate.html">Module estimate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plotting.html">Module plotting</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Jupyter Notebooks</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/paudetseis/PlateFlex/blob/master/plateflex/examples/Notebooks/Ex1_making_grids.ipynb">Example 1: Making grids</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/paudetseis/PlateFlex/blob/master/plateflex/examples/Notebooks/Ex2_wavelet_analysis.ipynb">Example 2: Wavelet analysis</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/paudetseis/PlateFlex/blob/master/plateflex/examples/Notebooks/Ex3_admittance_coherence.ipynb">Example 3: Admittance and coherence</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/paudetseis/PlateFlex/blob/master/plateflex/examples/Notebooks/Ex4_estimate_flex_parameters_cell.ipynb">Example 4: Flexural parameters at single grid cell</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/paudetseis/PlateFlex/blob/master/plateflex/examples/Notebooks/Ex5_estimate_flex_parameters_grid.ipynb">Example 5: Flexural parameters mapped over grid</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/paudetseis/PlateFlex/blob/master/plateflex/examples/Notebooks/Ex6_full_suite_North_America.ipynb">Example 6: Full suite for North America</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/paudetseis/PlateFlex/blob/master/plateflex/examples/Notebooks/Ex7_full_suite_NW_Pacific.ipynb">Example 7: Full suite for NW Pacific</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/paudetseis/PlateCurie/blob/master/platecurie/examples/Notebooks/Ex1_making_grids.ipynb">Example 1: Making grids</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/paudetseis/PlateCurie/blob/master/platecurie/examples/Notebooks/Ex2_wavelet_analysis.ipynb">Example 2: Wavelet analysis</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/paudetseis/PlateCurie/blob/master/platecurie/examples/Notebooks/Ex3_estimate_curie_parameters_cell.ipynb">Example 3: Magnetic parameters at single grid cell</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/paudetseis/PlateCurie/blob/master/platecurie/examples/Notebooks/Ex4_estimate_curie_parameters_grid.ipynb">Example 4: Magnetic parameters mapped over grid</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/paudetseis/PlateCurie/blob/master/platecurie/examples/Notebooks/Ex5_estimate_curie_variable_zt.ipynb">Example 5: Magnetic parameters with a priori constraints</a></li>
 </ul>
 
             
@@ -162,7 +160,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Description</li>
+      <li>Grid Classes</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -181,8 +179,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="description">
-<h1>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="grid-classes">
+<h1>Grid Classes<a class="headerlink" href="#grid-classes" title="Permalink to this headline">¶</a></h1>
 <p>This <a class="reference internal" href="api.html#module-platecurie" title="platecurie"><code class="xref py py-mod docutils literal notranslate"><span class="pre">platecurie</span></code></a> module contains the following <code class="docutils literal notranslate"><span class="pre">Grid</span></code> classes:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#platecurie.classes.MagGrid" title="platecurie.classes.MagGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">MagGrid</span></code></a></p></li>
@@ -196,22 +194,11 @@ for the following functionality:</p>
 <li><p>Obtaining the wavelet scalogram from the wavelet transform</p></li>
 <li><p>Plotting the input grids, wavelet transform components, and scalograms</p></li>
 </ul>
-<p>This module further contains the class <a class="reference internal" href="#platecurie.classes.Project" title="platecurie.classes.Project"><code class="xref py py-class docutils literal notranslate"><span class="pre">Project</span></code></a>,
-which itself is a container of grid objects
-(with at least one <a class="reference internal" href="#platecurie.classes.MagGrid" title="platecurie.classes.MagGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">MagGrid</span></code></a>). Methods are
-available to:</p>
-<ul class="simple">
-<li><p>Estimate model parameters at single grid cell</p></li>
-<li><p>Estimate model parameters at every (or decimated) grid cell</p></li>
-<li><p>Plot the statistics of the estimated parameters at single grid cell</p></li>
-<li><p>Plot the fitted power-spectral density of the magnetic anomaly at single grid cell</p></li>
-<li><p>Plot the final grids of model parameters</p></li>
-</ul>
 <div class="section" id="maggrid">
 <h2>MagGrid<a class="headerlink" href="#maggrid" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="platecurie.classes.MagGrid">
-<em class="property">class </em><code class="sig-prename descclassname">platecurie.classes.</code><code class="sig-name descname">MagGrid</code><span class="sig-paren">(</span><em class="sig-param">grid</em>, <em class="sig-param">dx</em>, <em class="sig-param">dy</em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.MagGrid" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">platecurie.classes.</code><code class="sig-name descname">MagGrid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">grid</span></em>, <em class="sig-param"><span class="n">dx</span></em>, <em class="sig-param"><span class="n">dy</span></em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.MagGrid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Basic grid class of <a class="reference internal" href="api.html#module-platecurie" title="platecurie"><code class="xref py py-mod docutils literal notranslate"><span class="pre">platecurie</span></code></a> for Magnetic anomaly data that inherits
 from <code class="xref py py-class docutils literal notranslate"><span class="pre">Grid</span></code></p>
 <p>Contains method to plot the grid data with default title and units using function
@@ -227,9 +214,9 @@ from <code class="xref py py-class docutils literal notranslate"><span class="pr
 <dt><code class="docutils literal notranslate"><span class="pre">title</span></code>: str</dt><dd><p>Descriptor for Magnetic anomaly data</p>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">plateflex</span> <span class="k">import</span> <span class="n">Grid</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">platecurie</span> <span class="k">import</span> <span class="n">MagGrid</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">plateflex</span> <span class="kn">import</span> <span class="n">Grid</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">platecurie</span> <span class="kn">import</span> <span class="n">MagGrid</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">maggrid</span> <span class="o">=</span> <span class="n">MagGrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)),</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">maggrid</span><span class="p">,</span> <span class="n">Grid</span><span class="p">)</span>
 <span class="go">True</span>
@@ -240,9 +227,9 @@ from <code class="xref py py-class docutils literal notranslate"><span class="pr
 </div>
 <div class="section" id="ztgrid">
 <h2>ZtGrid<a class="headerlink" href="#ztgrid" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="platecurie.classes.ZtGrid">
-<em class="property">class </em><code class="sig-prename descclassname">platecurie.classes.</code><code class="sig-name descname">ZtGrid</code><span class="sig-paren">(</span><em class="sig-param">grid</em>, <em class="sig-param">dx</em>, <em class="sig-param">dy</em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.ZtGrid" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">platecurie.classes.</code><code class="sig-name descname">ZtGrid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">grid</span></em>, <em class="sig-param"><span class="n">dx</span></em>, <em class="sig-param"><span class="n">dy</span></em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.ZtGrid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Basic grid class of <a class="reference internal" href="api.html#module-platecurie" title="platecurie"><code class="xref py py-mod docutils literal notranslate"><span class="pre">platecurie</span></code></a> for the top of the magnetic layer that inherits
 from <code class="xref py py-class docutils literal notranslate"><span class="pre">Grid</span></code></p>
 <p>Contains method to plot the grid data with default title and units using function
@@ -264,11 +251,26 @@ methods are still available, they are not useful in this context.</p>
 </dd></dl>
 
 </div>
+</div>
+<div class="section" id="project-class">
+<h1>Project Class<a class="headerlink" href="#project-class" title="Permalink to this headline">¶</a></h1>
+<p>This module further contains the class <a class="reference internal" href="#platecurie.classes.Project" title="platecurie.classes.Project"><code class="xref py py-class docutils literal notranslate"><span class="pre">Project</span></code></a>,
+which itself is a container of grid objects
+(with at least one <a class="reference internal" href="#platecurie.classes.MagGrid" title="platecurie.classes.MagGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">MagGrid</span></code></a>). Methods are
+available to:</p>
+<ul class="simple">
+<li><p>Estimate model parameters at single grid cell</p></li>
+<li><p>Estimate model parameters at every (or decimated) grid cell</p></li>
+<li><p>Plot the statistics of the estimated parameters at single grid cell</p></li>
+<li><p>Plot the fitted power-spectral density of the magnetic anomaly at single grid cell</p></li>
+<li><p>Plot the final grids of model parameters</p></li>
+<li><p>Save the results to disk as .csv files</p></li>
+</ul>
 <div class="section" id="project">
 <h2>Project<a class="headerlink" href="#project" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="platecurie.classes.Project">
-<em class="property">class </em><code class="sig-prename descclassname">platecurie.classes.</code><code class="sig-name descname">Project</code><span class="sig-paren">(</span><em class="sig-param">grids=None</em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.Project" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">platecurie.classes.</code><code class="sig-name descname">Project</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">grids</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.Project" title="Permalink to this definition">¶</a></dt>
 <dd><p>Container for <a class="reference internal" href="#platecurie.classes.MagGrid" title="platecurie.classes.MagGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">MagGrid</span></code></a> and/or
 <a class="reference internal" href="#platecurie.classes.ZtGrid" title="platecurie.classes.ZtGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">ZtGrid</span></code></a> objects, with
 methods to estimate model parameters of the magnetic layer
@@ -299,9 +301,9 @@ will only proceed if the project holds exactly one
 <a class="reference internal" href="#platecurie.classes.MagGrid" title="platecurie.classes.MagGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">MagGrid</span></code></a> object.</p>
 </div>
 <p class="rubric">Examples</p>
-<dl class="method">
+<dl class="py method">
 <dt id="platecurie.classes.Project.append">
-<code class="sig-name descname">append</code><span class="sig-paren">(</span><em class="sig-param">grid</em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.Project.append" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">append</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">grid</span></em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.Project.append" title="Permalink to this definition">¶</a></dt>
 <dd><p>Append a single grid object to the
 current <cite>:class:`~platecurie.classes.Project</cite> object.</p>
 <dl class="field-list simple">
@@ -310,8 +312,8 @@ current <cite>:class:`~platecurie.classes.Project</cite> object.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">platecurie</span> <span class="k">import</span> <span class="n">MagGrid</span><span class="p">,</span> <span class="n">Project</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">platecurie</span> <span class="kn">import</span> <span class="n">MagGrid</span><span class="p">,</span> <span class="n">Project</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nn</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span> <span class="n">dd</span> <span class="o">=</span> <span class="mf">10.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span> <span class="o">=</span> <span class="n">MagGrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">nn</span><span class="p">,</span> <span class="n">nn</span><span class="p">),</span> <span class="n">dd</span><span class="p">,</span> <span class="n">dd</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">project</span> <span class="o">=</span> <span class="n">Project</span><span class="p">()</span>
@@ -320,9 +322,9 @@ current <cite>:class:`~platecurie.classes.Project</cite> object.</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="platecurie.classes.Project.extend">
-<code class="sig-name descname">extend</code><span class="sig-paren">(</span><em class="sig-param">grid_list</em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.Project.extend" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">extend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">grid_list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.Project.extend" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extend the current Project object with a list of Grid objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -331,8 +333,8 @@ current <cite>:class:`~platecurie.classes.Project</cite> object.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">platecurie</span> <span class="k">import</span> <span class="n">MagGrid</span><span class="p">,</span> <span class="n">ZtGrid</span><span class="p">,</span> <span class="n">Project</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">platecurie</span> <span class="kn">import</span> <span class="n">MagGrid</span><span class="p">,</span> <span class="n">ZtGrid</span><span class="p">,</span> <span class="n">Project</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nn</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span> <span class="n">dd</span> <span class="o">=</span> <span class="mf">10.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">maggrid</span> <span class="o">=</span> <span class="n">MagGrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">nn</span><span class="p">,</span> <span class="n">nn</span><span class="p">),</span> <span class="n">dd</span><span class="p">,</span> <span class="n">dd</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ztgrid</span> <span class="o">=</span> <span class="n">ZtGrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">nn</span><span class="p">,</span> <span class="n">nn</span><span class="p">),</span> <span class="n">dd</span><span class="p">,</span> <span class="n">dd</span><span class="p">)</span>
@@ -342,9 +344,9 @@ current <cite>:class:`~platecurie.classes.Project</cite> object.</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="platecurie.classes.Project.init">
-<code class="sig-name descname">init</code><span class="sig-paren">(</span><em class="sig-param">inverse='L2'</em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.Project.init" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inverse</span><span class="o">=</span><span class="default_value">'L2'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.Project.init" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to initialize a project. This step is required before estimating the
 model parameters. The method checks that the project contains
 exactly one <a class="reference internal" href="#platecurie.classes.MagGrid" title="platecurie.classes.MagGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">MagGrid</span></code></a>.
@@ -382,7 +384,7 @@ used in the estimation part.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">platecurie</span> <span class="k">import</span> <span class="n">MagGrid</span><span class="p">,</span> <span class="n">ZtGrid</span><span class="p">,</span> <span class="n">Project</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">platecurie</span> <span class="kn">import</span> <span class="n">MagGrid</span><span class="p">,</span> <span class="n">ZtGrid</span><span class="p">,</span> <span class="n">Project</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nn</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span> <span class="n">dd</span> <span class="o">=</span> <span class="mf">10.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">maggrid</span> <span class="o">=</span> <span class="n">MagGrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">nn</span><span class="p">,</span> <span class="n">nn</span><span class="p">),</span> <span class="n">dd</span><span class="p">,</span> <span class="n">dd</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ztgrid</span> <span class="o">=</span> <span class="n">ZtGrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">nn</span><span class="p">,</span> <span class="n">nn</span><span class="p">),</span> <span class="n">dd</span><span class="p">,</span> <span class="n">dd</span><span class="p">)</span>
@@ -392,9 +394,9 @@ used in the estimation part.</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="platecurie.classes.Project.estimate_cell">
-<code class="sig-name descname">estimate_cell</code><span class="sig-paren">(</span><em class="sig-param">cell=(0</em>, <em class="sig-param">0)</em>, <em class="sig-param">fix_beta=None</em>, <em class="sig-param">returned=False</em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.Project.estimate_cell" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">estimate_cell</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cell</span><span class="o">=</span><span class="default_value">0, 0</span></em>, <em class="sig-param"><span class="n">fix_beta</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">returned</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.Project.estimate_cell" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to estimate the parameters of the magnetized layer at a single cell location
 of the input grid.</p>
 <dl class="field-list simple">
@@ -421,9 +423,9 @@ of the input grid.</p>
 object.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="platecurie.classes.Project.estimate_grid">
-<code class="sig-name descname">estimate_grid</code><span class="sig-paren">(</span><em class="sig-param">nn=10</em>, <em class="sig-param">fix_beta=None</em>, <em class="sig-param">parallel=False</em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.Project.estimate_grid" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">estimate_grid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nn</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">fix_beta</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">parallel</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.Project.estimate_grid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to estimate the parameters of the magnetized layer at all grid point locations.
 It is also possible to decimate the number of grid cells at which to estimate parameters.</p>
 <dl class="field-list simple">
@@ -467,9 +469,9 @@ shape of <code class="docutils literal notranslate"><span class="pre">(int(nx/nn
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="platecurie.classes.Project.plot_stats">
-<code class="sig-name descname">plot_stats</code><span class="sig-paren">(</span><em class="sig-param">title=None</em>, <em class="sig-param">save=None</em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.Project.plot_stats" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">plot_stats</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">save</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.Project.plot_stats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to plot the marginal and joint distributions of samples drawn from the
 posterior distribution as well as the extracted statistics. Calls the function
 <a class="reference internal" href="plotting.html#platecurie.plotting.plot_stats" title="platecurie.plotting.plot_stats"><code class="xref py py-func docutils literal notranslate"><span class="pre">plot_stats()</span></code></a> with attributes as arguments.</p>
@@ -483,9 +485,9 @@ posterior distribution as well as the extracted statistics. Calls the function
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="platecurie.classes.Project.plot_functions">
-<code class="sig-name descname">plot_functions</code><span class="sig-paren">(</span><em class="sig-param">est='mean'</em>, <em class="sig-param">title=None</em>, <em class="sig-param">save=None</em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.Project.plot_functions" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">plot_functions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">est</span><span class="o">=</span><span class="default_value">'mean'</span></em>, <em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">save</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.Project.plot_functions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to plot observed and fitted PSD function using
 one of <code class="docutils literal notranslate"><span class="pre">MAP</span></code> or <code class="docutils literal notranslate"><span class="pre">mean</span></code> estimates. Calls the function
 <code class="xref py py-func docutils literal notranslate"><span class="pre">plot_fitted()</span></code> with attributes as arguments.</p>
@@ -500,9 +502,9 @@ one of <code class="docutils literal notranslate"><span class="pre">MAP</span></
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="platecurie.classes.Project.plot_results">
-<code class="sig-name descname">plot_results</code><span class="sig-paren">(</span><em class="sig-param">mean_A=False</em>, <em class="sig-param">MAP_A=False</em>, <em class="sig-param">std_A=False</em>, <em class="sig-param">mean_zt=False</em>, <em class="sig-param">MAP_zt=False</em>, <em class="sig-param">std_zt=False</em>, <em class="sig-param">mean_dz=False</em>, <em class="sig-param">MAP_dz=False</em>, <em class="sig-param">std_dz=False</em>, <em class="sig-param">mean_beta=False</em>, <em class="sig-param">MAP_beta=False</em>, <em class="sig-param">std_beta=False</em>, <em class="sig-param">chi2=False</em>, <em class="sig-param">mask=False</em>, <em class="sig-param">contours=None</em>, <em class="sig-param">filter=False</em>, <em class="sig-param">sigma=1</em>, <em class="sig-param">save=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.Project.plot_results" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">plot_results</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mean_A</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">MAP_A</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">std_A</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">mean_zt</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">MAP_zt</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">std_zt</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">mean_dz</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">MAP_dz</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">std_dz</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">mean_beta</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">MAP_beta</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">std_beta</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">chi2</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">mask</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">contours</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">filter</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">sigma</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">save</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.Project.plot_results" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to plot grids of estimated parameters with fixed labels and titles.
 To have more control over the plot rendering, use the function
 <code class="xref py py-func docutils literal notranslate"><span class="pre">plot_real_grid()</span></code> with the relevant quantities and
@@ -513,6 +515,30 @@ plotting options.</p>
 All variables default to False (no plot generated)</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="platecurie.classes.Project.save_results">
+<code class="sig-name descname">save_results</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mean_A</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">MAP_A</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">std_A</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">mean_dz</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">MAP_dz</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">std_dz</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">mean_beta</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">MAP_beta</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">std_beta</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">mean_zt</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">MAP_zt</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">std_zt</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">chi2</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">mask</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">contours</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">filter</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">sigma</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">prefix</span><span class="o">=</span><span class="default_value">'PlateFlex_'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.classes.Project.save_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to save grids of estimated parameters with default file names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mean/MAP/std_A/dz/beta/zt</strong> (<em>bool</em>) – Type of grid to save.
+All variables default to False (no grid saved)</p></li>
+<li><p><strong>mask</strong> (<em>bool</em>) – Whether or not to save the mask</p></li>
+<li><p><strong>contours</strong> (<em>List</em>) – List of contours with coordinate positions</p></li>
+<li><p><strong>filter</strong> (<em>bool</em>) – Whether or not to filter the resulting grid using a Gaussian filter</p></li>
+<li><p><strong>sigma</strong> (<em>int</em>) – Standard deviation of filter (in terms of adjacent cells), if set to <code class="docutils literal notranslate"><span class="pre">True</span></code></p></li>
+<li><p><strong>prefix</strong> (<em>str</em>) – Prefix of file name.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is advisable to save each grid separately using one call per grid, in order
+to have more control on file names.</p>
+</div>
 </dd></dl>
 
 </dd></dl>

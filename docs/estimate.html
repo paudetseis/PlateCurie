@@ -21,11 +21,11 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Module plotting" href="plotting.html" />
-    <link rel="prev" title="Description" href="classes.html" /> 
+    <link rel="prev" title="Grid Classes" href="classes.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,20 +84,30 @@
               
             
             
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <p class="caption"><span class="caption-text">Quick Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="links.html">GitHub Repositories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="links.html#references">References</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api.html">Licence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html#installation">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html#functions">Functions</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Classes</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="classes.html">Description</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Modules</span></p>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Grid Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html#project-class">Project Class</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Module estimate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plotting.html">Module plotting</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Jupyter Notebooks</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/paudetseis/PlateCurie/blob/master/platecurie/examples/Notebooks/Ex1_making_grids.ipynb">Example 1: Making grids</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/paudetseis/PlateCurie/blob/master/platecurie/examples/Notebooks/Ex2_wavelet_analysis.ipynb">Example 2: Wavelet analysis</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/paudetseis/PlateCurie/blob/master/platecurie/examples/Notebooks/Ex3_estimate_curie_parameters_cell.ipynb">Example 3: Magnetic parameters at single grid cell</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/paudetseis/PlateCurie/blob/master/platecurie/examples/Notebooks/Ex4_estimate_curie_parameters_grid.ipynb">Example 4: Magnetic parameters mapped over grid</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/paudetseis/PlateCurie/blob/master/platecurie/examples/Notebooks/Ex5_estimate_curie_variable_zt.ipynb">Example 5: Magnetic parameters with a priori constraints</a></li>
 </ul>
 
             
@@ -178,9 +188,9 @@ of the magnetic layer model using non-linear least-squares from the function <co
 with a <code class="docutils literal notranslate"><span class="pre">theano</span></code> decorator to be incorporated as <code class="docutils literal notranslate"><span class="pre">pymc</span></code> variables. These functions are
 used within <a class="reference internal" href="classes.html#platecurie.classes.Project" title="platecurie.classes.Project"><code class="xref py py-class docutils literal notranslate"><span class="pre">Project</span></code></a> methods as with <a class="reference internal" href="plotting.html#module-platecurie.plotting" title="platecurie.plotting"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plotting</span></code></a>
 functions.</p>
-<dl class="function">
+<dl class="py function">
 <dt id="platecurie.estimate.bayes_estimate_cell">
-<code class="sig-prename descclassname">platecurie.estimate.</code><code class="sig-name descname">bayes_estimate_cell</code><span class="sig-paren">(</span><em class="sig-param">k</em>, <em class="sig-param">psd</em>, <em class="sig-param">epsd</em>, <em class="sig-param">fix_beta=None</em>, <em class="sig-param">prior_zt=None</em>, <em class="sig-param">draws=500</em>, <em class="sig-param">tunes=500</em>, <em class="sig-param">cores=4</em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.estimate.bayes_estimate_cell" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">platecurie.estimate.</code><code class="sig-name descname">bayes_estimate_cell</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">psd</span></em>, <em class="sig-param"><span class="n">epsd</span></em>, <em class="sig-param"><span class="n">fix_beta</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">prior_zt</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">draws</span><span class="o">=</span><span class="default_value">500</span></em>, <em class="sig-param"><span class="n">tunes</span><span class="o">=</span><span class="default_value">500</span></em>, <em class="sig-param"><span class="n">cores</span><span class="o">=</span><span class="default_value">4</span></em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.estimate.bayes_estimate_cell" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to estimate the parameters of the magnetic model at a single cell location
 of the input grids.</p>
 <p>Can incorporate 2 (‘A’, and ‘dz’), 3 (either ‘A’, ‘zt’ and ‘dz’ or
@@ -225,9 +235,9 @@ stochastic variables.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="platecurie.estimate.get_bayes_estimates">
-<code class="sig-prename descclassname">platecurie.estimate.</code><code class="sig-name descname">get_bayes_estimates</code><span class="sig-paren">(</span><em class="sig-param">summary</em>, <em class="sig-param">map_estimate</em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.estimate.get_bayes_estimates" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">platecurie.estimate.</code><code class="sig-name descname">get_bayes_estimates</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">summary</span></em>, <em class="sig-param"><span class="n">map_estimate</span></em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.estimate.get_bayes_estimates" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract useful estimates from the Posterior distributions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -259,9 +269,9 @@ stochastic variables.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="platecurie.estimate.L2_estimate_cell">
-<code class="sig-prename descclassname">platecurie.estimate.</code><code class="sig-name descname">L2_estimate_cell</code><span class="sig-paren">(</span><em class="sig-param">k</em>, <em class="sig-param">psd</em>, <em class="sig-param">epsd</em>, <em class="sig-param">fix_beta=None</em>, <em class="sig-param">prior_zt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.estimate.L2_estimate_cell" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">platecurie.estimate.</code><code class="sig-name descname">L2_estimate_cell</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">psd</span></em>, <em class="sig-param"><span class="n">epsd</span></em>, <em class="sig-param"><span class="n">fix_beta</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">prior_zt</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.estimate.L2_estimate_cell" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to estimate the parameters of the magnetic model at a single cell location
 of the input grids.</p>
 <dl class="field-list simple">
@@ -290,9 +300,9 @@ of the input grids.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="platecurie.estimate.get_L2_estimates">
-<code class="sig-prename descclassname">platecurie.estimate.</code><code class="sig-name descname">get_L2_estimates</code><span class="sig-paren">(</span><em class="sig-param">summary</em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.estimate.get_L2_estimates" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">platecurie.estimate.</code><code class="sig-name descname">get_L2_estimates</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">summary</span></em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.estimate.get_L2_estimates" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns digestible estimates from the L2 estimates.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -318,9 +328,9 @@ of the input grids.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="platecurie.estimate.calculate_psd">
-<code class="sig-prename descclassname">platecurie.estimate.</code><code class="sig-name descname">calculate_psd</code><span class="sig-paren">(</span><em class="sig-param">k</em>, <em class="sig-param">A</em>, <em class="sig-param">zt</em>, <em class="sig-param">dz</em>, <em class="sig-param">beta</em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.estimate.calculate_psd" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">platecurie.estimate.</code><code class="sig-name descname">calculate_psd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">zt</span></em>, <em class="sig-param"><span class="n">dz</span></em>, <em class="sig-param"><span class="n">beta</span></em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.estimate.calculate_psd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate analytical expression for the power-spectral density function.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters</dt>
@@ -347,9 +357,9 @@ Cambridge Univ. Press.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="platecurie.estimate.calculate_bouligand">
-<code class="sig-prename descclassname">platecurie.estimate.</code><code class="sig-name descname">calculate_bouligand</code><span class="sig-paren">(</span><em class="sig-param">k</em>, <em class="sig-param">A</em>, <em class="sig-param">zt</em>, <em class="sig-param">dz</em>, <em class="sig-param">beta</em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.estimate.calculate_bouligand" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">platecurie.estimate.</code><code class="sig-name descname">calculate_bouligand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">zt</span></em>, <em class="sig-param"><span class="n">dz</span></em>, <em class="sig-param"><span class="n">beta</span></em><span class="sig-paren">)</span><a class="headerlink" href="#platecurie.estimate.calculate_bouligand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the synthetic power spectral density of
 magnetic anomalies Equation (4) of Bouligand et al. (2009)</p>
 <dl class="field-list">
@@ -388,7 +398,7 @@ doi:10.1029/2009JB006494</p>
         <a href="plotting.html" class="btn btn-neutral float-right" title="Module plotting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="classes.html" class="btn btn-neutral float-left" title="Description" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="classes.html" class="btn btn-neutral float-left" title="Grid Classes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
