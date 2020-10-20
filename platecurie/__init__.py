@@ -69,7 +69,7 @@ where ``platecurie`` can be installed along with its dependencies.
 
 .. sourcecode:: bash
 
-   conda create -n curie python=3.7 numpy pymc3 matplotlib seaborn -c conda-forge
+   conda create -n curie python=3.7 fortran-compiler numpy pymc3 matplotlib seaborn -c conda-forge
 
 Activate the newly created environment:
 
@@ -77,11 +77,12 @@ Activate the newly created environment:
 
    conda activate curie
 
-Install the required ``plateflex`` software
+Install the required ``plateflex`` software 
+(see `here <https://paudetseis.github.io/PlateFlex/getting_started.html#installing-from-source`_)
 
-.. sourcecode:: bash
+# .. sourcecode:: bash
 
-   pip install plateflex
+#    pip install plateflex
 
 Installing from source
 ++++++++++++++++++++++
@@ -99,12 +100,12 @@ Installing from source
 
    pip install .
 
-Installing from Pypi
-++++++++++++++++++++
+# Installing from Pypi
+# ++++++++++++++++++++
 
-.. sourcecode:: bash
+# .. sourcecode:: bash
 
-   pip install platecurie
+#    pip install platecurie
 
 """
 # -*- coding: utf-8 -*-
