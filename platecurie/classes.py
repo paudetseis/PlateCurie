@@ -804,51 +804,92 @@ class Project(object):
                 mean_A_grid = gaussian(self.mean_A_grid, sigma=sigma)
             else:
                 mean_A_grid = self.mean_A_grid
-            flexplot.plot_real_grid(mean_A_grid, mask=new_mask, \
-                title='Constant term', clabel=r'A (nT$^2$)', save=save, **kwargs)
+            flexplot.plot_real_grid(
+                mean_A_grid, 
+                mask=new_mask, 
+                title='Constant term', 
+                clabel=r'A (nT$^2$)', 
+                contours=contours, 
+                save=save, 
+                **kwargs)
         if MAP_A:
             if filter:
                 MAP_A_grid = gaussian(self.MAP_A_grid, sigma=sigma)
             else:
                 MAP_A_grid = self.MAP_A_grid
-            flexplot.plot_real_grid(MAP_A_grid, mask=new_mask, \
-                title='MAP estimate of $A$', clabel=r'A (nT$^2$)', save=save, **kwargs)
+            flexplot.plot_real_grid(
+                MAP_A_grid, 
+                mask=new_mask, 
+                title='MAP estimate of $A$', 
+                clabel=r'A (nT$^2$)', 
+                contours=contours, 
+                save=save, 
+                **kwargs)
         if std_A:
             if filter:
                 std_A_grid = gaussian(self.std_A_grid, sigma=sigma)
             else:
                 std_A_grid = self.std_A_grid
-            flexplot.plot_real_grid(std_A_grid, mask=new_mask, \
-                title='Error on $A$', clabel=r'A (nT$^2$)', save=save, **kwargs)
+            flexplot.plot_real_grid(
+                std_A_grid, 
+                mask=new_mask, 
+                title='Error on $A$', 
+                clabel=r'A (nT$^2$)', 
+                contours=contours, 
+                save=save, 
+                **kwargs)
         if mean_dz:
             if filter:
                 mean_dz_grid = gaussian(self.mean_dz_grid, sigma=sigma)
             else:
                 mean_dz_grid = self.mean_dz_grid
-            flexplot.plot_real_grid(mean_dz_grid, mask=new_mask, \
-                title='Magnetic layer thickness', clabel=r'$dz$ (km)', save=save, **kwargs)
+            flexplot.plot_real_grid(
+                mean_dz_grid, 
+                mask=new_mask, 
+                title='Magnetic layer thickness', 
+                clabel=r'$dz$ (km)', 
+                contours=contours, 
+                save=save, 
+                **kwargs)
         if MAP_dz:
             if filter:
                 MAP_dz_grid = gaussian(self.MAP_dz_grid, sigma=sigma)
             else:
                 MAP_dz_grid = self.MAP_dz_grid
-            flexplot.plot_real_grid(MAP_dz_grid, mask=new_mask, \
-                title='MAP estimate of $dz$', clabel=r'$dz$ (km)', save=save, **kwargs)
+            flexplot.plot_real_grid(
+                MAP_dz_grid, mask=new_mask, 
+                title='MAP estimate of $dz$', 
+                clabel=r'$dz$ (km)', 
+                contours=contours, 
+                save=save, 
+                **kwargs)
         if std_dz:
             if filter:
                 std_dz_grid = gaussian(self.std_dz_grid, sigma=sigma)
             else:
                 std_dz_grid = self.std_dz_grid
-            flexplot.plot_real_grid(std_dz_grid, mask=new_mask, \
-                title='Error on $dz$', clabel=r'$dz$ (km)', save=save, **kwargs)
+            flexplot.plot_real_grid(
+                std_dz_grid, 
+                mask=new_mask, 
+                title='Error on $dz$', 
+                clabel=r'$dz$ (km)', 
+                contours=contours, 
+                save=save, 
+                **kwargs)
         if mean_beta:
             try:
                 if filter:
                     mean_beta_grid = gaussian(self.mean_beta_grid, sigma=sigma)
                 else:
                     mean_beta_grid = self.mean_beta_grid
-                flexplot.plot_real_grid(mean_beta_grid, mask=new_mask, \
-                    title='Fractal magnetization', clabel=r'$\beta$', save=save, **kwargs)
+                flexplot.plot_real_grid(
+                    mean_beta_grid, 
+                    mask=new_mask, 
+                    title='Fractal magnetization', 
+                    clabel=r'$\beta$', 
+                    contours=contours, 
+                    save=save, 
+                    **kwargs)
             except:
                 print("parameter 'beta' was not estimated")
         if MAP_beta:
@@ -857,8 +898,14 @@ class Project(object):
                     MAP_beta_grid = gaussian(self.MAP_beta_grid, sigma=sigma)
                 else:
                     MAP_beta_grid = self.MAP_beta_grid
-                flexplot.plot_real_grid(MAP_beta_grid, mask=new_mask, \
-                    title=r'MAP estimate of $\beta$', clabel=r'$\beta$', save=save, **kwargs)
+                flexplot.plot_real_grid(
+                    MAP_beta_grid, 
+                    mask=new_mask, 
+                    title=r'MAP estimate of $\beta$', 
+                    clabel=r'$\beta$', 
+                    contours=contours, 
+                    save=save, 
+                    **kwargs)
             except:
                 print("parameter 'beta' was not estimated")
         if std_beta:
@@ -867,8 +914,14 @@ class Project(object):
                     std_beta_grid = gaussian(self.std_beta_grid, sigma=sigma)
                 else:
                     std_beta_grid = self.std_beta_grid
-                flexplot.plot_real_grid(self.std_beta_grid, mask=new_mask, \
-                    title=r'Error on $\beta$', clabel=r'$\beta$', save=save, **kwargs)
+                flexplot.plot_real_grid(
+                    self.std_beta_grid, 
+                    mask=new_mask, 
+                    title=r'Error on $\beta$', 
+                    clabel=r'$\beta$', 
+                    contours=contours, 
+                    save=save, 
+                    **kwargs)
             except:
                 print("parameter 'beta' was not estimated")
         if mean_zt:
@@ -877,8 +930,14 @@ class Project(object):
                     mean_zt_grid = gaussian(self.mean_zt_grid, sigma=sigma)
                 else:
                     mean_zt_grid = self.mean_zt_grid
-                flexplot.plot_real_grid(mean_zt_grid, mask=new_mask, \
-                    title='Depth to top of layer', clabel=r'$z_t$ (km)', save=save, **kwargs)
+                flexplot.plot_real_grid(
+                    mean_zt_grid, 
+                    mask=new_mask, 
+                    title='Depth to top of layer', 
+                    clabel=r'$z_t$ (km)', 
+                    contours=contours, 
+                    save=save, 
+                    **kwargs)
             except:
                 print("parameter 'zt' was not estimated")
         if MAP_zt:
@@ -887,8 +946,14 @@ class Project(object):
                     MAP_zt_grid = gaussian(self.MAP_zt_grid, sigma=sigma)
                 else:
                     MAP_zt_grid = self.MAP_zt_grid
-                flexplot.plot_real_grid(MAP_zt_grid, mask=new_mask, \
-                    title=r'MAP estimate of $z_t$', clabel=r'$z_t$ (km)', save=save, **kwargs)
+                flexplot.plot_real_grid(
+                    MAP_zt_grid, 
+                    mask=new_mask, 
+                    title=r'MAP estimate of $z_t$', 
+                    clabel=r'$z_t$ (km)', 
+                    contours=contours, 
+                    save=save, 
+                    **kwargs)
             except:
                 print("parameter 'zt' was not estimated")
         if std_zt:
@@ -897,8 +962,14 @@ class Project(object):
                     std_zt_grid = gaussian(self.std_zt_grid, sigma=sigma)
                 else:
                     std_zt_grid = self.std_zt_grid
-                flexplot.plot_real_grid(std_zt_grid, mask=new_mask, \
-                    title=r'Error on $z_t$', clabel=r'$z_t$ (km)', save=save, **kwargs)
+                flexplot.plot_real_grid(
+                    std_zt_grid, 
+                    mask=new_mask, 
+                    title=r'Error on $z_t$', 
+                    clabel=r'$z_t$ (km)', 
+                    contours=contours, 
+                    save=save, 
+                    **kwargs)
             except:
                 print("parameter 'zt' was not estimated")
         if chi2:
@@ -907,9 +978,14 @@ class Project(object):
                     chi2_grid = gaussian(self.chi2_grid, sigma=sigma)
                 else:
                     chi2_grid = self.chi2_grid
-                flexplot.plot_real_grid(chi2_grid, mask=new_mask, \
-                    title='Reduced chi-squared error', clabel=r'$\chi_{\nu}^2$', \
-                    contours=contours, save=save, **kwargs)
+                flexplot.plot_real_grid(
+                    chi2_grid, 
+                    mask=new_mask, 
+                    title='Reduced chi-squared error', 
+                    clabel=r'$\chi_{\nu}^2$', 
+                    contours=contours, 
+                    save=save, 
+                    **kwargs)
             except:
                 print("parameter 'chi2' was not estimated")
 
