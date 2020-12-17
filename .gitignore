@@ -12,7 +12,4 @@ paper.*
 build
 dist
 
-_build
-*.rst
-Makefile
 make.bat
