@@ -59,7 +59,7 @@ Also, the following package is required:
 
 - `plateflex <https://github.com/paudetseis/PlateFlex>`_
 
-See below for full installation details. 
+See below for full installation details.
 
 Conda environment
 +++++++++++++++++
@@ -77,8 +77,8 @@ Activate the newly created environment:
 
    conda activate curie
 
-Install the required ``plateflex`` software 
-(see `here <https://paudetseis.github.io/PlateFlex/getting_started.html#installing-from-source`_)
+Install the required ``plateflex`` software
+(see `here <https://paudetseis.github.io/PlateFlex/getting_started.html#installing-from-source>`_)
 
 # .. sourcecode:: bash
 
@@ -126,7 +126,7 @@ def get_conf_cpwt():
 
     .. rubric:: Example
 
-    >>> import platecurie 
+    >>> import platecurie
     >>> platecurie.get_conf_cpwt()
     Wavelet parameter used in platecurie.cpwt:
     ------------------------------------------
