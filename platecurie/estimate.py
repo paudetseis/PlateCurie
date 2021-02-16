@@ -161,26 +161,26 @@ def get_bayes_estimates(summary, map_estimate):
         if index=='A':
             mean_A = row['mean']
             std_A = row['sd']
-            C2_5_A = row['hpd_2.5']
-            C97_5_A = row['hpd_97.5']
+            C2_5_A = row['hdi_3%']
+            C97_5_A = row['hdi_97%']
             best_A = np.float(map_estimate['A'])
         elif index=='zt':
             mean_zt = row['mean']
             std_zt = row['sd']
-            C2_5_zt = row['hpd_2.5']
-            C97_5_zt = row['hpd_97.5']
+            C2_5_zt = row['hdi_3%']
+            C97_5_zt = row['hdi_97%']
             best_zt = np.float(map_estimate['zt'])
         elif index=='dz':
             mean_dz = row['mean']
             std_dz = row['sd']
-            C2_5_dz = row['hpd_2.5']
-            C97_5_dz = row['hpd_97.5']
+            C2_5_dz = row['hdi_3%']
+            C97_5_dz = row['hdi_97%']
             best_dz = np.float(map_estimate['dz'])
         elif index=='beta':
             mean_beta = row['mean']
             std_beta = row['sd']
-            C2_5_beta = row['hpd_2.5']
-            C97_5_beta = row['hpd_97.5']
+            C2_5_beta = row['hdi_3%']
+            C97_5_beta = row['hdi_97%']
             best_beta = np.float(map_estimate['beta'])
 
     if mean_beta is not None and mean_zt is not None:
