@@ -80,10 +80,6 @@ Activate the newly created environment:
 Install the required ``plateflex`` software
 (see `here <https://paudetseis.github.io/PlateFlex/getting_started.html#installing-from-source>`_)
 
-# .. sourcecode:: bash
-
-#    pip install plateflex
-
 Installing from source
 ++++++++++++++++++++++
 
@@ -99,13 +95,6 @@ Installing from source
 .. sourcecode:: bash
 
    pip install .
-
-# Installing from Pypi
-# ++++++++++++++++++++
-
-# .. sourcecode:: bash
-
-#    pip install platecurie
 
 """
 # -*- coding: utf-8 -*-
