@@ -323,7 +323,7 @@ def plot_functions(k, psd, epsd, ppsd=None, title=None, save=None):
     """
     Function to plot observed and fitted PSD function using 
     one of ``MAP`` or ``mean`` estimates. The observed PSD function is plotted
-    regardless of method to estimate the model paramters. 
+    regardless of method to estimate the model paramters
 
     :type k: :class:`~numpy.ndarray`
     :param k: 1D array of wavenumbers

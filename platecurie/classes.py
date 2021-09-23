@@ -759,7 +759,7 @@ class Project(object):
                     mb = self.fix_beta
 
             # Calculate predicted PSD from estimates
-            ppsd = estimate.calculate_psd(k, mA, mzt, mdz, mb)
+            ppsd = estimate.calculate_bouligand(k, mA, mzt, mdz, mb)
 
             # Call function from ``plotting`` module
             curieplot.plot_functions(k, psd, epsd, ppsd=ppsd, title=title, save=save)
@@ -772,8 +772,10 @@ class Project(object):
 
     def plot_results(self, mean_A=False, MAP_A=False, std_A=False, \
         mean_zt=False, MAP_zt=False, std_zt=False, mean_dz=False, MAP_dz=False, \
-        std_dz=False, mean_beta=False, MAP_beta=False, std_beta=False, \
-        chi2=False, mask=False, contours=None, filter=False, sigma=1, save=None, **kwargs):
+        std_dz=False, mean_base=False, MAP_base=False, std_base=False, \
+        mean_beta=False, MAP_beta=False, std_beta=False, \
+        chi2=False, mask=False, contours=None, filter=False, sigma=1, \
+        save=None, **kwargs):
         """
         Method to plot grids of estimated parameters with fixed labels and titles. 
         To have more control over the plot rendering, use the function 
@@ -923,7 +925,67 @@ class Project(object):
                     save=save, 
                     **kwargs)
             except:
-                print("parameter 'beta' was not estimated")
+                print("parameter 'beta' was not estimated")      
+        if mean_base:
+            try:
+                if filter:
+                    mean_base_grid = gaussian(self.mean_base_grid, sigma=sigma)
+                else:
+                    mean_base_grid = self.mean_base_grid
+                flexplot.plot_real_grid(
+                    mean_base_grid, 
+                    mask=new_mask, 
+                    title='Depth to base of layer', 
+                    clabel=r'$base$ (km)', 
+                    contours=contours, 
+                    save=save, 
+                    **kwargs)
+            except:
+                print('parameter "base" was not estimated, \
+                      this parameter needs to be calculated outside of this \
+                      function by \
+                      project.mean_base_grid = project.mean_zt_grid + project.mean_dz_grid \
+                      and can then be plotted using this function.')                
+        if MAP_base:
+            try:
+                if filter:
+                    MAP_base_grid = gaussian(self.MAP_base_grid, sigma=sigma)
+                else:
+                    MAP_base_grid = self.MAP_base_grid
+                flexplot.plot_real_grid(
+                    MAP_base_grid, 
+                    mask=new_mask, 
+                    title='MAP estimate of depth to base of layer', 
+                    clabel=r'$base$ (km)', 
+                    contours=contours, 
+                    save=save, 
+                    **kwargs)
+            except:
+                print('parameter "MAP_base" was not estimated, \
+                      this parameter needs to be calculated outside of this \
+                      function by \
+                      project.MAP_base_grid = project.MAP_zt_grid + project.MAP_dz_grid \
+                      and can then be plotted using this function.')                       
+        if std_base:
+            try:
+                if filter:
+                    std_base_grid = gaussian(self.std_base_grid, sigma=sigma)
+                else:
+                    std_base_grid = self.std_base_grid
+                flexplot.plot_real_grid(
+                    std_base_grid, 
+                    mask=new_mask, 
+                    title='Error on depth to base of layer', 
+                    clabel=r'$base error$ (km)', 
+                    contours=contours, 
+                    save=save, 
+                    **kwargs)
+            except:
+                print('parameter "std_base" was not estimated, \
+                      this parameter needs to be calculated outside of this \
+                      function by \
+                      project.std_base_grid = project.std_zt_grid + project.std_dz_grid \
+                      and can then be plotted using this function.') 
         if mean_zt:
             try:
                 if filter:
