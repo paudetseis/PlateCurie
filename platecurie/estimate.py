@@ -28,12 +28,15 @@ This :mod:`~platecurie` module contains the following functions:
 - :func:`~platecurie.estimate.L2_estimate_cell`: Set up non-linear curve fitting to estimate the parameters
   of the magnetic layer model using non-linear least-squares from the function :func:`scipy.optimize.curve_fit`.  
 - :func:`~platecurie.estimate.get_L2_estimates`: Explore the output the non-linear inversion
-- :func:`~platecurie.estimate.calculate_psd`: Calculate the analytical PSD function. 
+- :func:`~platecurie.estimate.calculate_psd`: Calculate the analytical PSD function in 2D. 
+- :func:`~platecurie.estimate.calculate_bouligand`: Calculate the analytical PSD function using Bouligand eqn4 in 3D. 
 
 An internal function is available to calculate predicted power-spectral density data
 with a ``theano`` decorator to be incorporated as ``pymc`` variables. These functions are
 used within :class:`~platecurie.classes.Project` methods as with :mod:`~platecurie.plotting`
 functions.
+
+The psd estimate uses Bouligand et al. (2009) equation 4 by default.
 
 """
 
@@ -44,6 +47,7 @@ from theano.compile.ops import as_op
 import theano.tensor as tt
 from scipy.optimize import curve_fit
 import pandas as pd
+from scipy.special import gamma, kv
 
 def bayes_estimate_cell(k, psd, epsd, fix_beta=None, prior_zt=None, 
     draws=500, tunes=500, cores=4):
@@ -105,7 +109,7 @@ def bayes_estimate_cell(k, psd, epsd, fix_beta=None, prior_zt=None,
             zt = pm.Uniform('zt', lower=0., upper=10.)
 
         # Predicted PSD
-        psd_exp = calculate_psd_theano(k_obs, A, zt, dz, beta)
+        psd_exp = calculate_bouligand_theano(k_obs, A, zt, dz, beta)
 
         # Uncertainty as observed distribution
         dpsd = 3.*0.434*epsd/psd
@@ -230,13 +234,13 @@ def L2_estimate_cell(k, psd, epsd, fix_beta=None, prior_zt=None):
     if fix_beta is None and prior_zt is None:
 
         theta0 = np.array([20., 1., 10., 2.])
-        function = lambda k, A, zt, dz, beta: calculate_psd(k, A, zt, dz, beta)
+        function = lambda k, A, zt, dz, beta: calculate_bouligand(k, A, zt, dz, beta)
         p1fit, p1cov = curve_fit(function, k, y_obs, p0=theta0, \
             sigma=y_err, absolute_sigma=True, max_nfev=1000, \
-            bounds=([1., 0., 1., 0.], [30., 10., 50., 4.]))
+            bounds=([1., 0., 1., 0.], [30., 10., 50., 6.]))
 
         # Calculate best fit function
-        pred = calculate_psd(k, p1fit[0], p1fit[1], p1fit[2], p1fit[3])
+        pred = calculate_bouligand(k, p1fit[0], p1fit[1], p1fit[2], p1fit[3])
         
         # calculate reduced chi-square
         rchi2 = np.sum((pred - y_obs)**2\
@@ -245,13 +249,13 @@ def L2_estimate_cell(k, psd, epsd, fix_beta=None, prior_zt=None):
     elif fix_beta is None and prior_zt is not None:
 
         theta0 = np.array([20., 10., 2.])
-        function = lambda k, A, dz, beta: calculate_psd(k, A, prior_zt, dz, beta)
+        function = lambda k, A, dz, beta: calculate_bouligand(k, A, prior_zt, dz, beta)
         p1fit, p1cov = curve_fit(function, k, y_obs, p0=theta0, \
             sigma=y_err, absolute_sigma=True, max_nfev=1000, \
-            bounds=([1., 1., 0.], [30., 50., 4.]))
+            bounds=([1., 1., 0.], [30., 50., 6.]))
 
         # Calculate best fit function
-        pred = calculate_psd(k, p1fit[0], prior_zt, p1fit[1], p1fit[2])
+        pred = calculate_bouligand(k, p1fit[0], prior_zt, p1fit[1], p1fit[2])
         
         # calculate reduced chi-square
         rchi2 = np.sum((pred - y_obs)**2\
@@ -260,13 +264,13 @@ def L2_estimate_cell(k, psd, epsd, fix_beta=None, prior_zt=None):
     elif fix_beta is not None and prior_zt is None:
 
         theta0 = np.array([20., 1., 10.])
-        function = lambda k, A, zt, dz: calculate_psd(k, A, zt, dz, beta=fix_beta)
+        function = lambda k, A, zt, dz: calculate_bouligand(k, A, zt, dz, beta=fix_beta)
         p1fit, p1cov = curve_fit(function, k, y_obs, p0=theta0, \
             sigma=y_err, absolute_sigma=True, max_nfev=1000, \
             bounds=([1., 0., 1.], [30., 10., 50.]))
 
         # Calculate best fit function
-        pred = calculate_psd(k, p1fit[0], p1fit[1], p1fit[2], fix_beta)
+        pred = calculate_bouligand(k, p1fit[0], p1fit[1], p1fit[2], fix_beta)
         
         # calculate reduced chi-square
         rchi2 = np.sum((pred - y_obs)**2\
@@ -275,13 +279,13 @@ def L2_estimate_cell(k, psd, epsd, fix_beta=None, prior_zt=None):
     else:
 
         theta0 = np.array([20., 10.])
-        function = lambda k, A, dz: calculate_psd(k, A, prior_zt, dz, beta=fix_beta)
+        function = lambda k, A, dz: calculate_bouligand(k, A, prior_zt, dz, beta=fix_beta)
         p1fit, p1cov = curve_fit(function, k, y_obs, p0=theta0, \
             sigma=y_err, absolute_sigma=True, max_nfev=1000, \
             bounds=([1., 1.], [30., 50.]))
 
         # Calculate best fit function
-        pred = calculate_psd(k, p1fit[0], prior_zt, p1fit[1], fix_beta)
+        pred = calculate_bouligand(k, p1fit[0], prior_zt, p1fit[1], fix_beta)
         
         # calculate reduced chi-square
         rchi2 = np.sum((pred - y_obs)**2\
@@ -366,7 +370,7 @@ def get_L2_estimates(summary):
 
 def calculate_psd(k, A, zt, dz, beta):
     """
-    Calculate analytical expression for the power-spectral density function. 
+    Calculate 2D analytical expression for the power-spectral density function. 
 
     :type k: :class:`~numpy.ndarray`
     :param k: 1D array of wavenumbers
@@ -401,7 +405,7 @@ def calculate_psd(k, A, zt, dz, beta):
 
 def calculate_bouligand(k, A, zt, dz, beta):
     """
-    Calculate the synthetic power spectral density of
+    Calculate the 3D synthetic power spectral density of
     magnetic anomalies Equation (4) of Bouligand et al. (2009)
     
     :type k: :class:`~numpy.ndarray`
@@ -432,6 +436,7 @@ def calculate_bouligand(k, A, zt, dz, beta):
     coshkhdz = np.cosh(khdz)
 
     Phi1d = A - 2.0 * kh * zt - (beta - 1.0) * np.log(kh) - khdz
+    
     C = (np.sqrt(np.pi)/gamma(1.0 + 0.5 * beta)*( \
         0.5 * coshkhdz * gamma(0.5 * (1.0 + beta)) - \
         kv((-0.5 * (1.0 + beta)), khdz) * np.power(0.5 * khdz, \
@@ -443,9 +448,9 @@ def calculate_bouligand(k, A, zt, dz, beta):
 
 @as_op(itypes=[tt.dvector, tt.dscalar, tt.dscalar, tt.dscalar, tt.dscalar], 
     otypes=[tt.dvector])
-def calculate_psd_theano(k, A, zt, dz, beta):
+def calculate_bouligand_theano(k, A, zt, dz, beta):
     """
     Calculate analytical expression for the power-spectral density function. 
     """
 
-    return calculate_psd(k, A, zt, dz, beta)
+    return calculate_bouligand(k, A, zt, dz, beta)
