@@ -48,55 +48,90 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-Installation
-------------
-
 Dependencies
 ++++++++++++
 
-The current version was developed using **Python3.7** \
-Also, the following package is required:
+- A fortran compiler
+- ``pymc`` 
+- ``seaborn``
+- ``scikit-image`` (https://scikit-image.org)
+- ``plateflex``
 
-- `plateflex <https://github.com/paudetseis/PlateFlex>`_
-
-See below for full installation details.
+See below for full installation details. 
 
 Conda environment
 +++++++++++++++++
 
 We recommend creating a custom ``conda`` environment
-where ``platecurie`` can be installed along with its dependencies.
+where ``platecurie`` can be installed along with its dependencies. This will ensure
+that all packages are compatible.
+
+.. Note::
+    In theory, you could use your own fortran compiler. However, to ensure a proper installation,
+    it is recommended to install `fortran-compiler` in the `pflex` environment.
 
 .. sourcecode:: bash
 
-   conda create -n curie python=3.7 fortran-compiler numpy pymc3 matplotlib seaborn -c conda-forge
+   conda create -n pcurie -c conda-forge python=3.12 fortran-compiler pymc seaborn scikit-image
 
 Activate the newly created environment:
 
 .. sourcecode:: bash
 
-   conda activate curie
+   conda activate pcurie
 
-Install the required ``plateflex`` software
-(see `here <https://paudetseis.github.io/PlateFlex/getting_started.html#installing-from-source>`_)
-
-Installing from source
-++++++++++++++++++++++
-
-- Clone the repository:
+Install ``plateflex`` from the development on GitHub
 
 .. sourcecode:: bash
 
-   git clone https://github.com/paudetseis/PlateCurie.git
-   cd PlateCurie
+    pip install plateflex@git+https://github.com/paudetseis/plateflex
 
-- Install using ``pip``
+Installing development branch from GitHub
++++++++++++++++++++++++++++++++++++++++++
+
+Install the latest version of ``platecurie`` from the GitHub repository with the following command:
 
 .. sourcecode:: bash
 
-   pip install .
+    pip install platecurie@git+https://github.com/paudetseis/platecurie
+
+Jupyter Notebooks
++++++++++++++++++
+
+Included in this package is a set of Jupyter Notebooks, which give examples on how to call the 
+various routines The Notebooks describe how to reproduce published examples of synthetic data from 
+Gaudreau et al., (2019)
+
+After installing ``platecurie``, these notebooks can be locally installed (i.e., in a local folder ``Examples``) 
+from the package by running:
+
+.. sourcecode:: python
+
+    from plateflex import doc
+    doc.install_doc(path='Examples')
+
+To run the notebooks you will have to further install ``jupyter``:
+
+.. sourcecode:: bash
+
+    conda install jupyter
+
+Then:
+
+.. sourcecode:: bash
+
+    unzip data.zip
+    cd Examples
+    jupyter notebook
+
+You can then save the notebooks as ``python`` scripts and you should be good to go!
 
 """
+
+__version__ = '0.2.0'
+
+__author__ = 'Pascal Audet'
+
 # -*- coding: utf-8 -*-
 from . import estimate
 from . import plotting
