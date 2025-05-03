@@ -17,39 +17,43 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
+    name: ${{ matrix.os }} Python ${{ matrix.python-version }}
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        python-version: [3.7, 3.8, 3.9]
+        os: ["ubuntu-latest"]
+        python-version: ["3.12"]
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-        with:
-          repository: paudetseis/PlateFlex
-      - uses: conda-incubator/setup-miniconda@v2
+      - uses: actions/checkout@v4
+      - uses: conda-incubator/setup-miniconda@v3
         with:
           activate-environment: test
           auto-activate-base: false
+          python-version: ${{ matrix.python-version }}
 
-      - name: Install PlateFlex
+      - name: Install
         shell: bash -l {0}
         run: |
-          conda info
+          conda list
           conda config --add channels conda-forge
-          conda install fortran-compiler pymc3 seaborn
-          pip install -e .
+          conda install fortran-compiler pymc seaborn scikit-image
+          pip install plateflex@git+https://github.com/paudetseis/plateflex
+          pip install .
 
-      - uses: actions/checkout@v2
-      - name: Install PlateCurie
-        shell: bash -l {0}
-        run: |
-          pip install -e .
+      # - name: Tests
+      #   shell: bash -l {0}
+      #   run: |
+      #     mkdir empty
+      #     cd empty
+      #     conda install pytest-cov
+      #     pytest -v --cov=obstools ../obstools/tests/
+      #     bash <(curl -s https://codecov.io/bash)
 
       - name: Make docs
-        if: matrix.python-version == '3.8' 
+        if: matrix.python-version == '3.12' 
         shell: bash -l {0}
         run: |
           cd docs
@@ -60,7 +64,7 @@ jobs:
           cd ..
 
       - name: Deploy 🚀
-        if: matrix.python-version == '3.8' 
+        if: matrix.python-version == '3.12' 
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

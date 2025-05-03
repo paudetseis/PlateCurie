@@ -1,6 +1,0 @@
-plateflex.conf
---------------
-
-.. automodule:: plateflex.conf
-   :members:
-
