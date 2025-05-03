@@ -97,11 +97,11 @@ Install the latest version of ``platecurie`` from the GitHub repository with the
 Jupyter Notebooks
 +++++++++++++++++
 
-Included in this package is a set of Jupyter Notebooks, which give examples on how to call the 
+Included in the documentation is a set of Jupyter Notebooks, which give examples on how to call the 
 various routines The Notebooks describe how to reproduce published examples of synthetic data from 
 Gaudreau et al. (2019).
 
-To install the notebooks, you will need to clone the repository
+To install the notebooks locally, you will need to clone the repository
 
 .. sourcecode:: bash
 
@@ -120,6 +120,11 @@ Then:
 .. sourcecode:: bash
 
     jupyter notebook
+
+.. Note::
+    It is recommended to copy the notebooks from the PlateCurie repository
+    to some local folder before running them.
+
 
 """
 
