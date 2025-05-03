@@ -93,13 +93,13 @@ def bayes_estimate_cell(k, psd, epsd, fix_beta=None, prior_zt=None,
 
         if fix_beta is not None:
             # Pass `beta` variable as pytensor variable
-            beta = pt.as_tensor_variable(float64(fix_beta))
+            beta = pt.as_tensor_variable(float(fix_beta))
         else:
             beta = pm.Uniform('beta', lower=0., upper=4.)
 
         if prior_zt is not None:
             # Pass `zt` variable as pytensor variable
-            zt = pt.as_tensor_variable(float64(prior_zt))
+            zt = pt.as_tensor_variable(float(prior_zt))
         else:
             # Prior distribution of `zt`
             zt = pm.Uniform('zt', lower=0., upper=10.)
