@@ -395,7 +395,7 @@ class Project(object):
 
         .. rubric:: Additional Attributes
 
-        ``trace`` : :class:`~pymc3.backends.base.MultiTrace`
+        ``trace`` : :class:`~pymc.backends.base.MultiTrace`
             Posterior samples from the MCMC chains
         ``summary`` : :class:`~pandas.core.frame.DataFrame`
             Summary statistics from Posterior distributions
@@ -731,14 +731,14 @@ class Project(object):
                         mb = self.fix_beta
 
                 elif est=='MAP':
-                    mA = np.float(self.map_estimate['A'])
-                    mdz = np.float(self.map_estimate['dz'])
+                    mA = float(self.map_estimate['A'])
+                    mdz = float(self.map_estimate['dz'])
                     if 'zt' in self.map_estimate:
-                        mzt = np.float(self.map_estimate['zt'])
+                        mzt = float(self.map_estimate['zt'])
                     else:
                         mzt = self.zt_cell
                     if 'beta' in self.map_estimate:
-                        mb = np.float(self.map_estimate['beta'])
+                        mb = float(self.map_estimate['beta'])
                     else:
                         mb = self.fix_beta
                 else:
