@@ -21,9 +21,8 @@
 # SOFTWARE.
 """
 
-PlateFlex is a software for estimating the effective elastic thickness of the lithosphere
-from the inversion of flexural isostatic response functions calculated from a wavelet
-analysis of gravity and topography data.
+PlateCurie is a software for estimating the Curie depth from the inversion of 
+the power spectrum of magnetic anomaly data calculated from a wavelet transform.
 
 Licence
 -------
@@ -54,7 +53,7 @@ Dependencies
 - A fortran compiler
 - ``pymc`` 
 - ``seaborn``
-- ``scikit-image`` (https://scikit-image.org)
+- ``scikit-image``
 - ``plateflex``
 
 See below for full installation details. 
@@ -100,15 +99,15 @@ Jupyter Notebooks
 
 Included in this package is a set of Jupyter Notebooks, which give examples on how to call the 
 various routines The Notebooks describe how to reproduce published examples of synthetic data from 
-Gaudreau et al., (2019)
+Gaudreau et al. (2019).
 
-After installing ``platecurie``, these notebooks can be locally installed (i.e., in a local folder ``Examples``) 
-from the package by running:
+To install the notebooks, you will need to clone the repository
 
-.. sourcecode:: python
+.. sourcecode:: bash
 
-    from plateflex import doc
-    doc.install_doc(path='Examples')
+    git clone https://github.com/paudetseis/PlateCurie.git
+
+The Notebooks are in `PlateCurie/platecurie/examples/Notebooks`
 
 To run the notebooks you will have to further install ``jupyter``:
 
@@ -120,11 +119,7 @@ Then:
 
 .. sourcecode:: bash
 
-    unzip data.zip
-    cd Examples
     jupyter notebook
-
-You can then save the notebooks as ``python`` scripts and you should be good to go!
 
 """
 
