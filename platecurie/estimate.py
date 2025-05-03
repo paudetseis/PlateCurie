@@ -31,7 +31,7 @@ This :mod:`~platecurie` module contains the following functions:
 - :func:`~platecurie.estimate.calculate_psd`: Calculate the analytical PSD function. 
 
 An internal function is available to calculate predicted power-spectral density data
-with a ``theano`` decorator to be incorporated as ``pymc`` variables. These functions are
+with a ``pytensor`` decorator to be incorporated as ``pymc`` variables. These functions are
 used within :class:`~platecurie.classes.Project` methods as with :mod:`~platecurie.plotting`
 functions.
 
@@ -39,9 +39,9 @@ functions.
 
 # -*- coding: utf-8 -*-
 import numpy as np
-import pymc3 as pm
-from theano.compile.ops import as_op
-import theano.tensor as tt
+import pymc as pm
+from pytensor.compile.ops import as_op
+import pytensor.tensor as pt
 from scipy.optimize import curve_fit
 import pandas as pd
 
@@ -74,7 +74,7 @@ def bayes_estimate_cell(k, psd, epsd, fix_beta=None, prior_zt=None,
 
     :return:
         (tuple): Tuple containing:
-            * ``trace`` : :class:`~pymc3.backends.base.MultiTrace`
+            * ``trace`` : :class:`~pymc.backends.base.MultiTrace`
                 Posterior samples from the MCMC chains
             * ``summary`` : :class:`~pandas.core.frame.DataFrame`
                 Summary statistics from Posterior distributions
@@ -92,20 +92,20 @@ def bayes_estimate_cell(k, psd, epsd, fix_beta=None, prior_zt=None,
         dz = pm.Uniform('dz', lower=1., upper=50.)
 
         if fix_beta is not None:
-            # Pass `beta` variable as theano variable
-            beta = tt.as_tensor_variable(np.float64(fix_beta))
+            # Pass `beta` variable as pytensor variable
+            beta = pt.as_tensor_variable(float64(fix_beta))
         else:
             beta = pm.Uniform('beta', lower=0., upper=4.)
 
         if prior_zt is not None:
-            # Pass `zt` variable as theano variable
-            zt = tt.as_tensor_variable(np.float64(prior_zt))
+            # Pass `zt` variable as pytensor variable
+            zt = pt.as_tensor_variable(float64(prior_zt))
         else:
             # Prior distribution of `zt`
             zt = pm.Uniform('zt', lower=0., upper=10.)
 
         # Predicted PSD
-        psd_exp = calculate_psd_theano(k_obs, A, zt, dz, beta)
+        psd_exp = calculate_psd_pytensor(k_obs, A, zt, dz, beta)
 
         # Uncertainty as observed distribution
         dpsd = 3.*0.434*epsd/psd
@@ -163,25 +163,25 @@ def get_bayes_estimates(summary, map_estimate):
             std_A = row['sd']
             C2_5_A = row['hdi_3%']
             C97_5_A = row['hdi_97%']
-            best_A = np.float(map_estimate['A'])
+            best_A = float(map_estimate['A'])
         elif index=='zt':
             mean_zt = row['mean']
             std_zt = row['sd']
             C2_5_zt = row['hdi_3%']
             C97_5_zt = row['hdi_97%']
-            best_zt = np.float(map_estimate['zt'])
+            best_zt = float(map_estimate['zt'])
         elif index=='dz':
             mean_dz = row['mean']
             std_dz = row['sd']
             C2_5_dz = row['hdi_3%']
             C97_5_dz = row['hdi_97%']
-            best_dz = np.float(map_estimate['dz'])
+            best_dz = float(map_estimate['dz'])
         elif index=='beta':
             mean_beta = row['mean']
             std_beta = row['sd']
             C2_5_beta = row['hdi_3%']
             C97_5_beta = row['hdi_97%']
-            best_beta = np.float(map_estimate['beta'])
+            best_beta = float(map_estimate['beta'])
 
     if mean_beta is not None and mean_zt is not None:
         return mean_A, std_A, C2_5_A, C97_5_A, best_A, \
@@ -441,9 +441,9 @@ def calculate_bouligand(k, A, zt, dz, beta):
     return Phi1d
 
 
-@as_op(itypes=[tt.dvector, tt.dscalar, tt.dscalar, tt.dscalar, tt.dscalar], 
-    otypes=[tt.dvector])
-def calculate_psd_theano(k, A, zt, dz, beta):
+@as_op(itypes=[pt.dvector, pt.dscalar, pt.dscalar, pt.dscalar, pt.dscalar], 
+    otypes=[pt.dvector])
+def calculate_psd_pytensor(k, A, zt, dz, beta):
     """
     Calculate analytical expression for the power-spectral density function. 
     """
