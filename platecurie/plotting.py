@@ -60,19 +60,12 @@ def plot_stats(trace, summary, map_estimate, title=None, save=None):
     # Extract results from summary and map_estimate
     results = estimate.get_bayes_estimates(summary, map_estimate)
 
-    # Collect keys in trace object
-    keys = []
-    for var in trace.varnames:
-        if var[-1]=='_':
-            continue
-        keys.append(var)
+    # Collect pymc chains as ``pandas.DataFrame`` object
+    data = trace.posterior.to_dataframe()
+    keys = data.keys()
 
     # This means we searched for A and dz only
     if len(keys)==2:
-
-        # Collect pymc chains as ``pandas.DataFrame`` object
-        data = np.array([trace['A'], trace['dz']]).transpose()
-        data = pd.DataFrame(data, columns=[r'$A$', r'$dz$'])
 
         # Plot marginal and joint distributions as histograms and kernel density functions
         g = sns.PairGrid(data)
@@ -111,10 +104,6 @@ def plot_stats(trace, summary, map_estimate, title=None, save=None):
 
     # This means we searched for A, zt and dz
     elif 'zt' in keys and 'beta' not in keys:
-
-        # Collect pymc chains as ``pandas.DataFrame`` object
-        data = np.array([trace['A'], trace['zt'], trace['dz']]).transpose()
-        data = pd.DataFrame(data, columns=[r'$A$', r'$z_t$ (km)', r'$dz$ (km)'])
 
         # Plot marginal and joint distributions as histograms and kernel density functions
         g = sns.PairGrid(data)
@@ -171,10 +160,6 @@ def plot_stats(trace, summary, map_estimate, title=None, save=None):
     # This means we searched for A, zt and dz
     elif 'zt' not in keys and 'beta' in keys:
 
-        # Collect pymc chains as ``pandas.DataFrame`` object
-        data = np.array([trace['A'], trace['dz'], trace['beta']]).transpose()
-        data = pd.DataFrame(data, columns=[r'$A$', r'$dz$ (km)', r'$\beta$'])
-
         # Plot marginal and joint distributions as histograms and kernel density functions
         g = sns.PairGrid(data)
         g.map_diag(plt.hist, lw=1)
@@ -229,10 +214,6 @@ def plot_stats(trace, summary, map_estimate, title=None, save=None):
 
     # This means we searched for A, zt, dz and beta
     elif len(keys)==4:
-
-        # Collect pymc chains as ``pandas.DataFrame`` object
-        data = np.array([trace['A'], trace['zt'], trace['dz'], trace['beta']]).transpose()
-        data = pd.DataFrame(data, columns=[r'$A$', r'$z_t$ (km)', r'$dz$ (km)', r'$\beta$'])
 
         # Plot marginal and joint distributions as histograms and kernel density functions
         g = sns.PairGrid(data)
