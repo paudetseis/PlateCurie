@@ -32,7 +32,7 @@ Installation, Usage, API documentation and Jupyter Notebooks are described at ht
 Author: [`Pascal Audet`](https://www.uogeophysics.com/authors/admin/) (Developer and Maintainer)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3905424.svg)](https://doi.org/10.5281/zenodo.3905424)
-
+[![Build](https://github.com/paudetseis/PlateCurie/actions/workflows/deploy.yml/badge.svg)](https://github.com/paudetseis/PlateCurie/actions/workflows/deploy.yml)
 
 #### Citing
 
