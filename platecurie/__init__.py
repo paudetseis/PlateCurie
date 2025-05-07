@@ -47,6 +47,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+Installation
+------------
+
 Dependencies
 ++++++++++++
 
@@ -88,7 +91,8 @@ Install ``plateflex`` from the development on GitHub
 Installing development branch from GitHub
 +++++++++++++++++++++++++++++++++++++++++
 
-Install the latest version of ``platecurie`` from the GitHub repository with the following command:
+Install the latest version of ``platecurie`` from the GitHub repository with
+the following command:
 
 .. sourcecode:: bash
 
@@ -97,33 +101,37 @@ Install the latest version of ``platecurie`` from the GitHub repository with the
 Jupyter Notebooks
 +++++++++++++++++
 
-Included in the documentation is a set of Jupyter Notebooks, which give examples on how to call the 
-various routines The Notebooks describe how to reproduce published examples of synthetic data from 
-Gaudreau et al. (2019).
+Included in this package is a set of Jupyter Notebooks (see Table of Content),
+ with accompanying data, which give examples on how to call the various
+ routines The Notebooks describe how to reproduce published examples
+ from Gaudreau et al. (2019).
 
-To install the notebooks locally, you will need to clone the repository
 
-.. sourcecode:: bash
+These data and notebooks can be locally installed
+(i.e., in a local folder ``Examples``) from the package
+by typing in a ``python`` window:
 
-    git clone https://github.com/paudetseis/PlateCurie.git
+.. sourcecode:: python
 
-The Notebooks are in `PlateCurie/platecurie/examples/Notebooks`
+   from platecurie.doc import install_doc
+   install_doc(path='Examples')
 
-To run the notebooks you will have to further install ``jupyter``:
-
-.. sourcecode:: bash
-
-    conda install jupyter
-
-Then:
+To view and run the notebooks you will have to further install ``jupyter``.
+From the terminal, type:
 
 .. sourcecode:: bash
 
-    jupyter notebook
+   conda install jupyter
 
-.. Note::
-    It is recommended to copy the notebooks from the PlateCurie repository
-    to some local folder before running them.
+Followed by:
+
+.. sourcecode:: bash
+
+   cd Notebooks
+   jupyter notebook
+
+You can then save the notebooks as ``python`` scripts,
+check out the model files and set up your own examples.
 
 
 """
