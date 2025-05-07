@@ -26,9 +26,9 @@ Jupyter Notebooks and example data to a local directory.
 
 """
 
-import pkg_resources as _pkg_resources
-from distutils import dir_util as _dir_util
 import os
+import shutil
+import importlib.resources as resources
 
 
 def install_doc(path="./PlateCurie-Examples"):
@@ -40,19 +40,16 @@ def install_doc(path="./PlateCurie-Examples"):
     path ("./PlateCurie-Examples") is chosen to make collision less likely/problematic
 
     Example applications of PlateCurie are in the form of jupyter notebooks.
-
     """
 
-    Notebooks_Path = _pkg_resources.resource_filename(
-        "platecurie", "examples")
-
-    ct = _dir_util.copy_tree(
-        Notebooks_Path,
-        path,
-        preserve_mode=1,
-        preserve_times=1,
-        preserve_symlinks=1,
-        update=0,
-        verbose=1,
-        dry_run=0,
-    )
+    # Access the package resources
+    # Make sure 'platecurie' is a package and 'examples' is a subdirectory/package
+    with resources.path("platecurie", "examples") as notebooks_path:
+        # Use shutil.copytree() to copy directory contents
+        if os.path.exists(path):
+            raise FileExistsError(f"The target directory {path} already exists.")
+        shutil.copytree(
+            notebooks_path,
+            path,
+            copy_function=shutil.copy2,
+        )
