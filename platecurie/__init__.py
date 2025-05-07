@@ -101,11 +101,10 @@ the following command:
 Jupyter Notebooks
 +++++++++++++++++
 
-Included in this package is a set of Jupyter Notebooks (see Table of Content),
- with accompanying data, which give examples on how to call the various
- routines The Notebooks describe how to reproduce published examples
- from Gaudreau et al. (2019).
-
+Included in this package is a set of Jupyter Notebooks (see Table of Content)
+with accompanying data, which give examples on how to call the various
+routines The Notebooks describe how to reproduce published examples
+from Gaudreau et al. (2019).
 
 These data and notebooks can be locally installed
 (i.e., in a local folder ``Examples``) from the package
@@ -133,7 +132,6 @@ Followed by:
 You can then save the notebooks as ``python`` scripts,
 check out the model files and set up your own examples.
 
-
 """
 
 __version__ = '0.2.0'
@@ -146,10 +144,12 @@ from . import plotting
 from .classes import MagGrid, ZtGrid, SigZtGrid, Project
 from plateflex.cpwt import conf_cpwt as cf_wt
 
+
 def set_conf_cpwt(k0=5.336):
     cf_wt.k0 = k0
 
 set_conf_cpwt()
+
 
 def get_conf_cpwt():
     """
