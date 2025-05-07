@@ -126,7 +126,6 @@ Followed by:
 
 .. sourcecode:: bash
 
-   cd Notebooks
    jupyter notebook
 
 You can then save the notebooks as ``python`` scripts,
